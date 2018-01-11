@@ -8,6 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+// Resource returns this packages resource.
 func Resource() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceCreate,

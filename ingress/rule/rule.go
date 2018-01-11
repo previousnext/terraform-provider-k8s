@@ -7,6 +7,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/ingress/rule/path"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -25,6 +26,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in []interface{}) []extensionsv1beta1.IngressRule {
 	if len(in) == 0 {
 		return []extensionsv1beta1.IngressRule{}
@@ -49,6 +51,7 @@ func Expand(in []interface{}) []extensionsv1beta1.IngressRule {
 	return rules
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in []extensionsv1beta1.IngressRule) []interface{} {
 	flattened := make([]interface{}, len(in))
 

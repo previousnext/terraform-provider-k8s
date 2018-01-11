@@ -11,6 +11,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/container/resource"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -44,6 +45,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in []interface{}) ([]corev1.Container, error) {
 	if len(in) == 0 {
 		return []corev1.Container{}, nil
@@ -111,6 +113,7 @@ func Expand(in []interface{}) ([]corev1.Container, error) {
 	return containers, nil
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in []corev1.Container) []interface{} {
 	flattened := make([]interface{}, len(in))
 

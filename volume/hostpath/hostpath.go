@@ -4,6 +4,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
+// Expand will return a structured object.
 func Expand(in []interface{}) ([]corev1.Volume, []corev1.VolumeMount, error) {
 	if len(in) == 0 {
 		return []corev1.Volume{}, []corev1.VolumeMount{}, nil
@@ -36,6 +37,7 @@ func Expand(in []interface{}) ([]corev1.Volume, []corev1.VolumeMount, error) {
 	return volumes, mounts, nil
 }
 
+// Flatten structured object into unstructured.
 func Flatten(volumes []corev1.Volume, mounts []corev1.VolumeMount) []interface{} {
 	att := make([]interface{}, len(volumes))
 

@@ -14,7 +14,6 @@ lint:
 
 # Run tests with coverage reporting
 test:
-	go test -cover ./server/...
-	go test -cover ./cmd/...
+	# @todo, Unit tests for marshalling.
 
 .PHONY: build lint test

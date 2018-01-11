@@ -6,6 +6,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/intstr"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -34,6 +35,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in []interface{}) []extensionsv1beta1.HTTPIngressPath {
 	if len(in) == 0 {
 		return []extensionsv1beta1.HTTPIngressPath{}
@@ -60,6 +62,7 @@ func Expand(in []interface{}) []extensionsv1beta1.HTTPIngressPath {
 	return paths
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in []extensionsv1beta1.HTTPIngressPath) []interface{} {
 	flattened := make([]interface{}, len(in))
 

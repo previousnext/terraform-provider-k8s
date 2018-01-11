@@ -9,6 +9,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/binding/subject"
 )
 
+// Resource returns this packages resource.
 func Resource() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceCreate,
@@ -48,7 +49,7 @@ func generateRoleBinding(d *schema.ResourceData) (rbacv1.ClusterRoleBinding, err
 		name        = d.Get("name").(string)
 		refKind     = d.Get("ref_kind").(string)
 		refName     = d.Get("ref_name").(string)
-		refApiGroup = d.Get("ref_api_group").(string)
+		refAPIGroup = d.Get("ref_api_group").(string)
 		subjects    = d.Get("subject").([]interface{})
 	)
 
@@ -59,7 +60,7 @@ func generateRoleBinding(d *schema.ResourceData) (rbacv1.ClusterRoleBinding, err
 		RoleRef: rbacv1.RoleRef{
 			Kind:     refKind,
 			Name:     refName,
-			APIGroup: refApiGroup,
+			APIGroup: refAPIGroup,
 		},
 		Subjects: subject.Expand(subjects),
 	}

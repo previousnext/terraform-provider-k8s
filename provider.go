@@ -17,6 +17,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/storageclass"
 )
 
+// Provider returns this providers resources.
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{

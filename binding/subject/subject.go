@@ -5,6 +5,7 @@ import (
 	rbacv1 "k8s.io/api/rbac/v1"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -37,6 +38,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in []interface{}) []rbacv1.Subject {
 	if len(in) == 0 {
 		return []rbacv1.Subject{}
@@ -67,6 +69,7 @@ func Expand(in []interface{}) []rbacv1.Subject {
 	return rules
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in []rbacv1.Subject) []interface{} {
 	flattened := make([]interface{}, len(in))
 

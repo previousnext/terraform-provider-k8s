@@ -12,6 +12,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/volume"
 )
 
+// Resource returns this packages resource.
 func Resource() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceCreate,
