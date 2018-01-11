@@ -9,6 +9,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/ingress/rule"
 )
 
+// Resource returns this packages resource.
 func Resource() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceCreate,

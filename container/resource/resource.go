@@ -6,6 +6,7 @@ import (
 	k8sresource "k8s.io/apimachinery/pkg/api/resource"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -28,6 +29,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in []interface{}) (corev1.ResourceList, error) {
 	if len(in) == 0 {
 		return corev1.ResourceList{}, nil
@@ -60,6 +62,7 @@ func Expand(in []interface{}) (corev1.ResourceList, error) {
 	return list, nil
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in corev1.ResourceList) map[string]interface{} {
 	flattened := map[string]interface{}{}
 

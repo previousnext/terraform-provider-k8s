@@ -5,6 +5,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -32,6 +33,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in []interface{}) []corev1.EnvVar {
 	if len(in) == 0 {
 		return []corev1.EnvVar{}
@@ -62,6 +64,7 @@ func Expand(in []interface{}) []corev1.EnvVar {
 	return mounts
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in []corev1.EnvVar) []interface{} {
 	flattened := make([]interface{}, len(in))
 

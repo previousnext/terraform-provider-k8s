@@ -4,6 +4,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeMap,
@@ -12,6 +13,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(in map[string]interface{}) map[string]string {
 	labels := make(map[string]string)
 

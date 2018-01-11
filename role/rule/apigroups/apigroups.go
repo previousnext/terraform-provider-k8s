@@ -4,6 +4,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
+// Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Type:        schema.TypeList,
@@ -13,6 +14,7 @@ func Fields() *schema.Schema {
 	}
 }
 
+// Expand will return a structured object.
 func Expand(s []interface{}) []string {
 	result := make([]string, len(s), len(s))
 
@@ -28,6 +30,7 @@ func Expand(s []interface{}) []string {
 	return result
 }
 
+// Flatten structured object into unstructured.
 func Flatten(in []string) []interface{} {
 	flattened := make([]interface{}, len(in))
 
