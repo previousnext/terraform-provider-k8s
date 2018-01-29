@@ -23,6 +23,11 @@ func Fields() *schema.Schema {
 					Optional:    true,
 					Description: "Path to mount the volume into.",
 				},
+				"readonly": {
+					Type:        schema.TypeBool,
+					Optional:    true,
+					Description: "If this mount is read only.",
+				},
 			},
 		},
 	}
@@ -46,6 +51,10 @@ func Expand(in []interface{}) ([]corev1.VolumeMount, error) {
 		if path, ok := value["path"]; ok {
 			mounts[key].MountPath = path.(string)
 		}
+
+		if readonly, ok := value["readonly"]; ok {
+			mounts[key].ReadOnly = readonly.(bool)
+		}
 	}
 
 	return mounts, nil
@@ -65,6 +74,8 @@ func Flatten(in []corev1.VolumeMount) []interface{} {
 		if value.MountPath != "" {
 			row["value"] = value.MountPath
 		}
+
+		row["readonly"] = value.ReadOnly
 
 		flattened[key] = row
 	}
