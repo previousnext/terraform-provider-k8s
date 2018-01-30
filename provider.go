@@ -13,6 +13,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/deployment"
 	"github.com/previousnext/terraform-provider-k8s/ingress"
 	"github.com/previousnext/terraform-provider-k8s/role"
+	clusterrole "github.com/previousnext/terraform-provider-k8s/role/cluster"
 	"github.com/previousnext/terraform-provider-k8s/serviceaccount"
 	"github.com/previousnext/terraform-provider-k8s/storageclass"
 )
@@ -42,6 +43,7 @@ func Provider() *schema.Provider {
 			"k8s_service_account":      serviceaccount.Resource(),
 			"k8s_role":                 role.Resource(),
 			"k8s_role_binding":         rolebinding.Resource(),
+			"k8s_cluster_role":         clusterrole.Resource(),
 			"k8s_cluster_role_binding": clusterrolebinding.Resource(),
 		},
 		ConfigureFunc: providerConfigure,
