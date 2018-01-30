@@ -8,6 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/container"
+	"github.com/previousnext/terraform-provider-k8s/hostaliases"
 	"github.com/previousnext/terraform-provider-k8s/label"
 	"github.com/previousnext/terraform-provider-k8s/volume"
 )
@@ -44,6 +45,7 @@ func Resource() *schema.Resource {
 				Optional:    true,
 			},
 			"init_container": container.Fields(),
+			"hostaliases":    hostaliases.Fields(),
 			"container":      container.Fields(),
 			"volume":         volume.Fields(),
 		},
@@ -59,6 +61,7 @@ func generateDaemonSet(d *schema.ResourceData) (appsv1beta2.DaemonSet, error) {
 		hostNetwork    = d.Get("host_network").(bool)
 		serviceAccount = d.Get("service_account").(string)
 		initContainer  = d.Get("init_container").([]interface{})
+		aliases        = d.Get("hostaliases").([]interface{})
 		containers     = d.Get("container").([]interface{})
 		volumes        = d.Get("volume").([]interface{})
 	)
@@ -98,6 +101,7 @@ func generateDaemonSet(d *schema.ResourceData) (appsv1beta2.DaemonSet, error) {
 					InitContainers:     initContainerList,
 					Containers:         containerList,
 					Volumes:            volumeList,
+					HostAliases:        hostaliases.Expand(aliases),
 				},
 			},
 		},

@@ -7,6 +7,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 
 	"github.com/previousnext/terraform-provider-k8s/container"
+	"github.com/previousnext/terraform-provider-k8s/hostaliases"
 	"github.com/previousnext/terraform-provider-k8s/utils/id"
 	"github.com/previousnext/terraform-provider-k8s/volume"
 )
@@ -32,6 +33,7 @@ func resourceRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("namespace", daemonset.ObjectMeta.Namespace)
 	d.Set("service_account", daemonset.Spec.Template.Spec.ServiceAccountName)
 	d.Set("labels", daemonset.ObjectMeta.Labels)
+	d.Set("hostaliases", hostaliases.Flatten(daemonset.Spec.Template.Spec.HostAliases))
 	d.Set("container", container.Flatten(daemonset.Spec.Template.Spec.Containers))
 	d.Set("volume", volume.Flatten(daemonset.Spec.Template.Spec.Volumes))
 

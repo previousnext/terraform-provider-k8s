@@ -8,6 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/container"
+	"github.com/previousnext/terraform-provider-k8s/hostaliases"
 	"github.com/previousnext/terraform-provider-k8s/label"
 	"github.com/previousnext/terraform-provider-k8s/volume"
 )
@@ -36,9 +37,10 @@ func Resource() *schema.Resource {
 				Description: "ServiceAccount to associate with this Deployment.",
 				Optional:    true,
 			},
-			"labels":    label.Fields(),
-			"container": container.Fields(),
-			"volume":    volume.Fields(),
+			"labels":      label.Fields(),
+			"container":   container.Fields(),
+			"hostaliases": hostaliases.Fields(),
+			"volume":      volume.Fields(),
 		},
 	}
 }
@@ -49,6 +51,7 @@ func generateDeployment(d *schema.ResourceData) (appsv1beta2.Deployment, error) 
 		namespace      = d.Get("namespace").(string)
 		serviceaccount = d.Get("service_account").(string)
 		labels         = d.Get("labels").(map[string]interface{})
+		aliases        = d.Get("hostaliases").([]interface{})
 		containers     = d.Get("container").([]interface{})
 		volumes        = d.Get("volume").([]interface{})
 	)
@@ -81,6 +84,7 @@ func generateDeployment(d *schema.ResourceData) (appsv1beta2.Deployment, error) 
 					ServiceAccountName: serviceaccount,
 					Containers:         containerList,
 					Volumes:            volumeList,
+					HostAliases:        hostaliases.Expand(aliases),
 				},
 			},
 		},

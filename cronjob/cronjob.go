@@ -9,6 +9,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/container"
+	"github.com/previousnext/terraform-provider-k8s/hostaliases"
 	"github.com/previousnext/terraform-provider-k8s/label"
 	"github.com/previousnext/terraform-provider-k8s/volume"
 )
@@ -43,8 +44,9 @@ func Resource() *schema.Resource {
 				Description: "ServiceAccount to associate with this CronJob.",
 				Optional:    true,
 			},
-			"container": container.Fields(),
-			"volume":    volume.Fields(),
+			"hostaliases": hostaliases.Fields(),
+			"container":   container.Fields(),
+			"volume":      volume.Fields(),
 		},
 	}
 }
@@ -57,6 +59,7 @@ func generateCronJob(d *schema.ResourceData) (batchv1beta1.CronJob, error) {
 		labels         = d.Get("labels").(map[string]interface{})
 		schedule       = d.Get("schedule").(string)
 		serviceaccount = d.Get("service_account").(string)
+		aliases        = d.Get("hostaliases").([]interface{})
 		containers     = d.Get("container").([]interface{})
 		volumes        = d.Get("volume").([]interface{})
 	)
@@ -90,6 +93,7 @@ func generateCronJob(d *schema.ResourceData) (batchv1beta1.CronJob, error) {
 							Containers:         containerList,
 							Volumes:            volumeList,
 							ServiceAccountName: serviceaccount,
+							HostAliases:        hostaliases.Expand(aliases),
 						},
 					},
 				},

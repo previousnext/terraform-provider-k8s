@@ -7,6 +7,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 
 	"github.com/previousnext/terraform-provider-k8s/container"
+	"github.com/previousnext/terraform-provider-k8s/hostaliases"
 	"github.com/previousnext/terraform-provider-k8s/utils/id"
 	"github.com/previousnext/terraform-provider-k8s/volume"
 )
@@ -34,6 +35,7 @@ func resourceRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("schedule", cronJob.Spec.Schedule)
 	d.Set("service_account", cronJob.Spec.JobTemplate.Spec.Template.Spec.ServiceAccountName)
 	d.Set("container", container.Flatten(cronJob.Spec.JobTemplate.Spec.Template.Spec.Containers))
+	d.Set("hostaliases", hostaliases.Flatten(cronJob.Spec.JobTemplate.Spec.Template.Spec.HostAliases))
 	d.Set("volume", volume.Flatten(cronJob.Spec.JobTemplate.Spec.Template.Spec.Volumes))
 
 	return nil
