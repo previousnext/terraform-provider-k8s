@@ -33,6 +33,7 @@ func resourceRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("namespace", cronJob.ObjectMeta.Namespace)
 	d.Set("labels", cronJob.ObjectMeta.Labels)
 	d.Set("schedule", cronJob.Spec.Schedule)
+	d.Set("host_pid", cronJob.Spec.JobTemplate.Spec.Template.Spec.HostPID)
 	d.Set("service_account", cronJob.Spec.JobTemplate.Spec.Template.Spec.ServiceAccountName)
 	d.Set("container", container.Flatten(cronJob.Spec.JobTemplate.Spec.Template.Spec.Containers))
 	d.Set("hostaliases", hostaliases.Flatten(cronJob.Spec.JobTemplate.Spec.Template.Spec.HostAliases))

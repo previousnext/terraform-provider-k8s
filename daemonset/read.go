@@ -31,6 +31,7 @@ func resourceRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", daemonset.ObjectMeta.Name)
 	d.Set("namespace", daemonset.ObjectMeta.Namespace)
+	d.Set("host_pid", daemonset.Spec.Template.Spec.HostPID)
 	d.Set("service_account", daemonset.Spec.Template.Spec.ServiceAccountName)
 	d.Set("labels", daemonset.ObjectMeta.Labels)
 	d.Set("hostaliases", hostaliases.Flatten(daemonset.Spec.Template.Spec.HostAliases))

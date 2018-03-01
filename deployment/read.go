@@ -37,6 +37,7 @@ func resourceRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", deployment.ObjectMeta.Name)
 	d.Set("namespace", deployment.ObjectMeta.Namespace)
+	d.Set("host_pid", deployment.Spec.Template.Spec.HostPID)
 	d.Set("service_account", deployment.Spec.Template.Spec.ServiceAccountName)
 	d.Set("labels", deployment.ObjectMeta.Labels)
 	d.Set("image", deployment.Spec.Template.Spec.Containers[0].Image)
