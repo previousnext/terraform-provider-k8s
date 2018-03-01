@@ -39,6 +39,11 @@ func Resource() *schema.Resource {
 				Description: "How often to run this CronJob.",
 				Required:    true,
 			},
+			"host_pid": {
+				Type:        schema.TypeBool,
+				Description: "Use the host’s pid namespace.",
+				Optional:    true,
+			},
 			"service_account": {
 				Type:        schema.TypeString,
 				Description: "ServiceAccount to associate with this CronJob.",
@@ -58,6 +63,7 @@ func generateCronJob(d *schema.ResourceData) (batchv1beta1.CronJob, error) {
 		namespace      = d.Get("namespace").(string)
 		labels         = d.Get("labels").(map[string]interface{})
 		schedule       = d.Get("schedule").(string)
+		hostPid        = d.Get("host_pid").(bool)
 		serviceaccount = d.Get("service_account").(string)
 		aliases        = d.Get("hostaliases").([]interface{})
 		containers     = d.Get("container").([]interface{})
@@ -94,6 +100,7 @@ func generateCronJob(d *schema.ResourceData) (batchv1beta1.CronJob, error) {
 							Volumes:            volumeList,
 							ServiceAccountName: serviceaccount,
 							HostAliases:        hostaliases.Expand(aliases),
+							HostPID:            hostPid,
 						},
 					},
 				},

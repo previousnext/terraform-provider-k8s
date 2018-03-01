@@ -39,6 +39,11 @@ func Resource() *schema.Resource {
 				Optional:    true,
 				Default:     false,
 			},
+			"host_pid": {
+				Type:        schema.TypeBool,
+				Description: "Use the host’s pid namespace.",
+				Optional:    true,
+			},
 			"service_account": {
 				Type:        schema.TypeString,
 				Description: "ServiceAccount to associate with this DaemonSet.",
@@ -59,6 +64,7 @@ func generateDaemonSet(d *schema.ResourceData) (appsv1beta2.DaemonSet, error) {
 		namespace      = d.Get("namespace").(string)
 		labels         = d.Get("labels").(map[string]interface{})
 		hostNetwork    = d.Get("host_network").(bool)
+		hostPid        = d.Get("host_pid").(bool)
 		serviceAccount = d.Get("service_account").(string)
 		initContainer  = d.Get("init_container").([]interface{})
 		aliases        = d.Get("hostaliases").([]interface{})
@@ -101,6 +107,7 @@ func generateDaemonSet(d *schema.ResourceData) (appsv1beta2.DaemonSet, error) {
 					InitContainers:     initContainerList,
 					Containers:         containerList,
 					Volumes:            volumeList,
+					HostPID:            hostPid,
 					HostAliases:        hostaliases.Expand(aliases),
 				},
 			},

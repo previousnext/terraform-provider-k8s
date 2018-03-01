@@ -37,6 +37,11 @@ func Resource() *schema.Resource {
 				Description: "ServiceAccount to associate with this Deployment.",
 				Optional:    true,
 			},
+			"host_pid": {
+				Type:        schema.TypeBool,
+				Description: "Use the host’s pid namespace.",
+				Optional:    true,
+			},
 			"labels":      label.Fields(),
 			"container":   container.Fields(),
 			"hostaliases": hostaliases.Fields(),
@@ -49,6 +54,7 @@ func generateDeployment(d *schema.ResourceData) (appsv1beta2.Deployment, error) 
 	var (
 		name           = d.Get("name").(string)
 		namespace      = d.Get("namespace").(string)
+		hostPid        = d.Get("host_pid").(bool)
 		serviceaccount = d.Get("service_account").(string)
 		labels         = d.Get("labels").(map[string]interface{})
 		aliases        = d.Get("hostaliases").([]interface{})
@@ -85,6 +91,7 @@ func generateDeployment(d *schema.ResourceData) (appsv1beta2.Deployment, error) 
 					Containers:         containerList,
 					Volumes:            volumeList,
 					HostAliases:        hostaliases.Expand(aliases),
+					HostPID:            hostPid,
 				},
 			},
 		},
