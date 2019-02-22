@@ -7,7 +7,6 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
 	"github.com/pkg/errors"
-	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 )
 
@@ -39,9 +38,9 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 		cfg.KeyData = bytes.NewBufferString(v.(string)).Bytes()
 	}
 
-	k, err := kubernetes.NewForConfig(cfg)
+	k, err := NewForConfig(cfg)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to get Kubernetes config")
+		return nil, errors.Wrap(err, "failed to get client")
 	}
 
 	return k, nil

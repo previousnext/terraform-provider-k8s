@@ -3,15 +3,20 @@ package main
 import (
 	"github.com/hashicorp/terraform/helper/schema"
 
-	"github.com/previousnext/terraform-provider-k8s/apps/v1/daemonset"
-	"github.com/previousnext/terraform-provider-k8s/apps/v1/deployment"
-	"github.com/previousnext/terraform-provider-k8s/core/v1/serviceaccount"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apiextensions/v1beta1/crd"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/daemonset"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/deployment"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/statefulset"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/namespace"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/secret"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/service"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/serviceaccount"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/clusterrole"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/clusterrolebinding"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/rolebinding"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/storage/v1/storageclass"
 	"github.com/previousnext/terraform-provider-k8s/internal/terraform/config"
-	"github.com/previousnext/terraform-provider-k8s/rbac/v1/clusterrole"
-	"github.com/previousnext/terraform-provider-k8s/rbac/v1/clusterrolebinding"
-	"github.com/previousnext/terraform-provider-k8s/rbac/v1/role"
-	"github.com/previousnext/terraform-provider-k8s/rbac/v1/rolebinding"
-	"github.com/previousnext/terraform-provider-k8s/storage/v1/storageclass"
 )
 
 const (
@@ -19,10 +24,21 @@ const (
 	ResourceDeployment = "k8s_apps_v1_deployment"
 	// ResourceDaemonSet identifier for the Kubernetes DaemonSet.
 	ResourceDaemonSet = "k8s_apps_v1_daemonset"
+	// ResourceStatefulSet identifier for the Kubernetes StatefulSet.
+	ResourceStatefulSet = "k8s_apps_v1_statefulset"
+
 	// ResourceStorageClass identifier for the Kubernetes StorageClass.
 	ResourceStorageClass = "k8s_storage_v1_storageclass"
+
+	// ResourceNamespace identifier for the Kubernetes Namespace.
+	ResourceNamespace = "k8s_core_v1_namespace"
+	// ResourceSecret identifier for the Kubernetes Secret.
+	ResourceSecret = "k8s_core_v1_secret"
 	// ResourceServiceAccount identifier for the Kubernetes ServiceAccount.
 	ResourceServiceAccount = "k8s_core_v1_serviceaccount"
+	// ResourceService identifier for the Kubernetes Service.
+	ResourceService = "k8s_core_v1_service"
+
 	// ResourceRole identifier for the Kubernetes Role.
 	ResourceRole = "k8s_rbac_v1_role"
 	// ResourceRoleBinding identifier for the Kubernetes RoleBinding.
@@ -31,21 +47,32 @@ const (
 	ResourceClusterRole = "k8s_rbac_v1_clusterrole"
 	// ResourceClusterRoleBinding identifier for the Kubernetes ClusterRoleBinding.
 	ResourceClusterRoleBinding = "k8s_rbac_v1_clusterrolebinding"
+
+	// ResourceCustomtResourceDefinition identifier for the Kubernetes CustomtResourceDefinition.
+	ResourceCustomtResourceDefinition = "k8s_apiextensions_v1beta1_customresourcedefinition"
 )
 
 // Provider returns this providers resources.
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: config.Fields(),
+		DataSourcesMap: map[string]*schema.Resource{
+			ResourceService: service.Source(),
+		},
 		ResourcesMap: map[string]*schema.Resource{
-			ResourceDeployment:         deployment.Resource(),
-			ResourceDaemonSet:          daemonset.Resource(),
-			ResourceStorageClass:       storageclass.Resource(),
-			ResourceServiceAccount:     serviceaccount.Resource(),
-			ResourceRole:               role.Resource(),
-			ResourceRoleBinding:        rolebinding.Resource(),
-			ResourceClusterRole:        clusterrole.Resource(),
-			ResourceClusterRoleBinding: clusterrolebinding.Resource(),
+			ResourceNamespace:                 namespace.Resource(),
+			ResourceDeployment:                deployment.Resource(),
+			ResourceDaemonSet:                 daemonset.Resource(),
+			ResourceStatefulSet:               statefulset.Resource(),
+			ResourceStorageClass:              storageclass.Resource(),
+			ResourceServiceAccount:            serviceaccount.Resource(),
+			ResourceService:                   service.Resource(),
+			ResourceSecret:                    secret.Resource(),
+			ResourceRole:                      role.Resource(),
+			ResourceRoleBinding:               rolebinding.Resource(),
+			ResourceClusterRole:               clusterrole.Resource(),
+			ResourceClusterRoleBinding:        clusterrolebinding.Resource(),
+			ResourceCustomtResourceDefinition: crd.Resource(),
 		},
 		ConfigureFunc: config.Func,
 	}
