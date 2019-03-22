@@ -33,10 +33,11 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:cfb1fb9394fdd5607199b98dbd5c393d3049f992b83fbec0a9903954c1091578"
+  digest = "1:0490ca3f30c22357c866c9ae23d7b1e5a96c9e13c3fed753fce74c9c42ffb53c"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
+    "aws/arn",
     "aws/awserr",
     "aws/awsutil",
     "aws/client",
@@ -63,11 +64,15 @@
     "private/protocol",
     "private/protocol/eventstream",
     "private/protocol/eventstream/eventstreamapi",
+    "private/protocol/json/jsonutil",
+    "private/protocol/jsonrpc",
     "private/protocol/query",
     "private/protocol/query/queryutil",
     "private/protocol/rest",
+    "private/protocol/restjson",
     "private/protocol/restxml",
     "private/protocol/xml/xmlutil",
+    "service/eks",
     "service/s3",
     "service/sts",
   ]
@@ -327,6 +332,17 @@
   pruneopts = "UT"
   revision = "1624edc4454b8682399def8740d46db5e4362ba4"
   version = "v1.1.5"
+
+[[projects]]
+  branch = "master"
+  digest = "1:042bed82a758188516f50c49dd06b7fa0c074c3354f79fba7185305f16d044f8"
+  name = "github.com/kubernetes-sigs/aws-iam-authenticator"
+  packages = [
+    "pkg/arn",
+    "pkg/token",
+  ]
+  pruneopts = "UT"
+  revision = "390d9087a4bc24af323021e57c5a943541802723"
 
 [[projects]]
   digest = "1:0981502f9816113c9c8c4ac301583841855c8cf4da8c72f696b3ebedf6d0e4e5"
@@ -827,9 +843,15 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/aws/credentials",
+    "github.com/aws/aws-sdk-go/aws/session",
+    "github.com/aws/aws-sdk-go/service/eks",
+    "github.com/aws/aws-sdk-go/service/sts",
     "github.com/hashicorp/terraform/helper/schema",
     "github.com/hashicorp/terraform/plugin",
     "github.com/hashicorp/terraform/terraform",
+    "github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token",
     "github.com/pkg/errors",
     "k8s.io/api/apps/v1",
     "k8s.io/api/core/v1",

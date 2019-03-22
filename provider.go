@@ -7,6 +7,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/daemonset"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/deployment"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/statefulset"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/configmap"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/namespace"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/secret"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/service"
@@ -34,6 +35,8 @@ const (
 	ResourceNamespace = "k8s_core_v1_namespace"
 	// ResourceSecret identifier for the Kubernetes Secret.
 	ResourceSecret = "k8s_core_v1_secret"
+	// ResourceConfigMap identifier for the Kubernetes Secret.
+	ResourceConfigMap = "k8s_core_v1_configmap"
 	// ResourceServiceAccount identifier for the Kubernetes ServiceAccount.
 	ResourceServiceAccount = "k8s_core_v1_serviceaccount"
 	// ResourceService identifier for the Kubernetes Service.
@@ -68,6 +71,7 @@ func Provider() *schema.Provider {
 			ResourceServiceAccount:            serviceaccount.Resource(),
 			ResourceService:                   service.Resource(),
 			ResourceSecret:                    secret.Resource(),
+			ResourceConfigMap:                 configmap.Resource(),
 			ResourceRole:                      role.Resource(),
 			ResourceRoleBinding:               rolebinding.Resource(),
 			ResourceClusterRole:               clusterrole.Resource(),

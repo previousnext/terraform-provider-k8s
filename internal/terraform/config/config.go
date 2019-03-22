@@ -4,8 +4,13 @@ import (
 	"bytes"
 	"fmt"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/sts"
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
+	"github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/rest"
 )
@@ -30,12 +35,27 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 		cfg.CAData = bytes.NewBufferString(v.(string)).Bytes()
 	}
 
-	if v, ok := d.GetOk(FieldClientCertificate); ok {
-		cfg.CertData = bytes.NewBufferString(v.(string)).Bytes()
-	}
+	if v, ok := d.GetOk(FieldEKSCluster); ok {
+		var (
+			region  string
+			profile string
+			cluster = v.(string)
+		)
 
-	if v, ok := d.GetOk(FieldClientKey); ok {
-		cfg.KeyData = bytes.NewBufferString(v.(string)).Bytes()
+		if v, ok := d.GetOk(FieldAWSProfile); ok {
+			profile = v.(string)
+		}
+
+		if v, ok := d.GetOk(FieldAWSRegion); ok {
+			region = v.(string)
+		}
+
+		token, err := eksToken(region, cluster, profile)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to EKS bearer token")
+		}
+
+		cfg.BearerToken = token
 	}
 
 	k, err := NewForConfig(cfg)
@@ -44,4 +64,27 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 	}
 
 	return k, nil
+}
+
+// Helper function to generate an EKS Kubernetes client.
+func eksToken(region, cluster, profile string) (string, error) {
+	sess, err := session.NewSession(&aws.Config{
+		Region:      aws.String(region),
+		Credentials: credentials.NewSharedCredentials("", profile),
+	})
+	if err != nil {
+		return "", errors.Wrap(err, "failed to get session")
+	}
+
+	gen, err := token.NewGenerator(false)
+	if err != nil {
+		return "", errors.Wrap(err, "failed to create token client")
+	}
+
+	token, err := gen.GetWithSTS(cluster, sts.New(sess))
+	if err != nil {
+		return "", errors.Wrap(err, "failed to get token")
+	}
+
+	return token.Token, nil
 }

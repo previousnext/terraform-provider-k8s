@@ -7,14 +7,14 @@ const (
 	FieldHost = "host"
 	// FieldInsecure identifier for insecure field.
 	FieldInsecure = "insecure"
-	// FieldClientCertificate identifier for client_certificate field.
-	FieldClientCertificate = "client_certificate"
-	// FieldClientKey identifier for client_key field.
-	FieldClientKey = "client_key"
 	// FieldClusterCACertificate identifier for cluster_ca_certificate field.
 	FieldClusterCACertificate = "cluster_ca_certificate"
-	// FieldConfigPath identifier for config_path field.
-	FieldConfigPath = "config_path"
+	// FieldAWSRegion identifier for aws_region field.
+	FieldAWSRegion = "aws_region"
+	// FieldAWSProfile identifier for aws_profile field.
+	FieldAWSProfile = "aws_profile"
+	// FieldEKSCluster identifier for eks_cluster field.
+	FieldEKSCluster = "eks_cluster"
 )
 
 // Fields which are used to configure the Kubernetes client.
@@ -32,17 +32,23 @@ func Fields() map[string]*schema.Schema {
 			DefaultFunc: schema.EnvDefaultFunc("KUBE_INSECURE", false),
 			Description: "Whether server should be accessed without verifying the TLS certificate.",
 		},
-		FieldClientCertificate: {
+		FieldEKSCluster: {
 			Type:        schema.TypeString,
 			Optional:    true,
-			DefaultFunc: schema.EnvDefaultFunc("KUBE_CLIENT_CERT_DATA", ""),
-			Description: "PEM-encoded client certificate for TLS authentication.",
+			DefaultFunc: schema.EnvDefaultFunc("AWS_PROFILE", ""),
+			Description: "EKS cluster name.",
 		},
-		FieldClientKey: {
+		FieldAWSProfile: {
 			Type:        schema.TypeString,
 			Optional:    true,
-			DefaultFunc: schema.EnvDefaultFunc("KUBE_CLIENT_KEY_DATA", ""),
-			Description: "PEM-encoded client certificate key for TLS authentication.",
+			DefaultFunc: schema.EnvDefaultFunc("AWS_PROFILE", ""),
+			Description: "AWS Profile for authenticating with EKS.",
+		},
+		FieldAWSRegion: {
+			Type:        schema.TypeString,
+			Optional:    true,
+			DefaultFunc: schema.EnvDefaultFunc("AWS_PROFILE", ""),
+			Description: "AWS region for connecting to EKS.",
 		},
 		FieldClusterCACertificate: {
 			Type:        schema.TypeString,
