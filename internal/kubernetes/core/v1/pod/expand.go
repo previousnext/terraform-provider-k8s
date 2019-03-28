@@ -24,7 +24,7 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 
 		// Also apply an anti affinity rule to this pod based on the labels.
 		template.Spec.Affinity = &corev1.Affinity{
-			PodAffinity: &corev1.PodAffinity{
+			PodAntiAffinity: &corev1.PodAntiAffinity{
 				PreferredDuringSchedulingIgnoredDuringExecution: []corev1.WeightedPodAffinityTerm{
 					{
 						Weight: 100,
