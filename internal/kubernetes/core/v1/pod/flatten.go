@@ -41,6 +41,10 @@ func Flatten(template corev1.PodTemplateSpec) []interface{} {
 		row[FieldPullSecret] = template.Spec.ImagePullSecrets[0].Name
 	}
 
+	if template.Spec.HostPID {
+		row[FieldHostPID] = template.Spec.HostPID
+	}
+
 	out[0] = row
 
 	return out
