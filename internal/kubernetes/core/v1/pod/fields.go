@@ -22,6 +22,8 @@ const (
 	FieldServiceAccount = "service_account"
 	// FieldPullSecret is a field identifier.
 	FieldPullSecret = "pull_secret"
+	// FieldHostPID is a field identifier.
+	FieldHostPID = "host_pid"
 )
 
 // Fields which define a Pod.
@@ -51,6 +53,11 @@ func Fields() *schema.Schema {
 				FieldPullSecret: {
 					Type:     schema.TypeString,
 					Optional: true,
+				},
+				FieldHostPID:	{
+					Type:        schema.TypeBool,
+					Description: "Use the host’s pid namespace.",
+					Optional:    true,
 				},
 			},
 		},

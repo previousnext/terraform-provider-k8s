@@ -83,5 +83,9 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 		}
 	}
 
+	if val, ok := raw[FieldHostPID]; ok {
+		template.Spec.HostPID = val.(bool)
+	}
+
 	return template, nil
 }
