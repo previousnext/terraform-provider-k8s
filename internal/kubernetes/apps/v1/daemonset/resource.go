@@ -40,6 +40,10 @@ func Resource() *schema.Resource {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
+			FieldMatchLabels: &schema.Schema{
+				Type:     schema.TypeMap,
+				Optional: true,
+			},
 			FieldPod: pod.Fields(),
 		},
 	}
