@@ -32,7 +32,7 @@ func Read(d *schema.ResourceData, m interface{}) error {
 	d.Set(FieldName, daemonset.ObjectMeta.Name)
 	d.Set(FieldNamespace, daemonset.ObjectMeta.Namespace)
 	d.Set(FieldLabels, daemonset.ObjectMeta.Labels)
-
+	d.Set(FieldMatchLabels, daemonset.Spec.Selector.MatchLabels)
 	d.Set(FieldPod, pod.Flatten(daemonset.Spec.Template))
 
 	return nil
