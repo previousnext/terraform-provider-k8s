@@ -1,8 +1,10 @@
 package volume
 
 import (
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/nfs"
 	corev1 "k8s.io/api/core/v1"
+
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/nfs"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/hostpath"
 )
 
 // Expand will return a structured object.
@@ -42,6 +44,10 @@ func Expand(in []interface{}) ([]corev1.Volume, error) {
 
 		if val, ok := value[FieldNFS]; ok {
 			volumes[key].NFS = nfs.Expand(val.([]interface{}))
+		}
+
+		if val, ok := value[FieldHostPath]; ok {
+			volumes[key].HostPath = hostpath.Expand(val.([]interface{}))
 		}
 	}
 

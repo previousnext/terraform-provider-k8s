@@ -19,7 +19,6 @@ const (
 	FieldNFS = "nfs"
 	// FieldHostPath is a field identifier.
 	FieldHostPath = "host_path"
-
 )
 
 // Fields returns the fields for this package.
