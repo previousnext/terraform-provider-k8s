@@ -1,7 +1,6 @@
 package volume
 
 import (
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/nfs"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -34,14 +33,16 @@ func Expand(in []interface{}) ([]corev1.Volume, error) {
 			}
 		}
 
+		if hp, ok := value[FieldHostPath]; ok && hp != "" {
+			volumes[key].HostPath = &corev1.HostPathVolumeSource{
+				Path: hp.(string),
+			}
+		}
+
 		if dir, ok := value[FieldEmptyDir]; ok && dir != "" {
 			volumes[key].EmptyDir = &corev1.EmptyDirVolumeSource{
 				Medium: dir.(corev1.StorageMedium),
 			}
-		}
-
-		if val, ok := value[FieldNFS]; ok {
-			volumes[key].NFS = nfs.Expand(val.([]interface{}))
 		}
 	}
 

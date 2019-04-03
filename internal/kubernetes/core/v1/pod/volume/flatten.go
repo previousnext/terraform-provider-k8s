@@ -1,7 +1,6 @@
 package volume
 
 import (
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/nfs"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -24,12 +23,12 @@ func Flatten(in []corev1.Volume) []interface{} {
 			row[FieldConfigMap] = value.ConfigMap.LocalObjectReference.Name
 		}
 
-		if value.EmptyDir != nil {
-			row[FieldEmptyDir] = value.EmptyDir.Medium
+		if value.HostPath != nil && value.HostPath.Path != "" {
+			row[FieldHostPath] = value.HostPath.Path
 		}
 
-		if value.NFS != nil {
-			row[FieldNFS] = nfs.Flatten(value.NFS)
+		if value.EmptyDir != nil {
+			row[FieldEmptyDir] = value.EmptyDir.Medium
 		}
 
 		flattened[key] = row
