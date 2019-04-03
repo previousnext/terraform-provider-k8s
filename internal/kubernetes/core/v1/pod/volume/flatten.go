@@ -2,9 +2,6 @@ package volume
 
 import (
 	corev1 "k8s.io/api/core/v1"
-
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/nfs"
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/hostpath"
 )
 
 // Flatten structured object into unstructured.
@@ -26,16 +23,12 @@ func Flatten(in []corev1.Volume) []interface{} {
 			row[FieldConfigMap] = value.ConfigMap.LocalObjectReference.Name
 		}
 
+		if value.HostPath != nil && value.HostPath.Path != "" {
+			row[FieldHostPath] = value.HostPath.Path
+		}
+
 		if value.EmptyDir != nil {
 			row[FieldEmptyDir] = value.EmptyDir.Medium
-		}
-
-		if value.NFS != nil {
-			row[FieldNFS] = nfs.Flatten(value.NFS)
-		}
-
-		if value.HostPath != nil {
-			row[FieldHostPath] = hostpath.Flatten(value.HostPath)
 		}
 
 		flattened[key] = row

@@ -2,8 +2,6 @@ package volume
 
 import (
 	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/nfs"
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/volume/hostpath"
 )
 
 const (
@@ -45,8 +43,10 @@ func Fields() *schema.Schema {
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				FieldNFS:      nfs.Fields(),
-				FieldHostPath: hostpath.Fields(),
+				FieldHostPath: {
+					Type:     schema.TypeString,
+					Optional: true,
+				},
 			},
 		},
 	}
