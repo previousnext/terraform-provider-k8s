@@ -17,6 +17,10 @@ func Flatten(in []corev1.ContainerPort) []interface{} {
 			row[FieldContainerPort] = value.ContainerPort
 		}
 
+		if value.HostPort > 0 {
+			row[FieldHostPort] = value.HostPort
+		}
+
 		flattened[key] = row
 	}
 
