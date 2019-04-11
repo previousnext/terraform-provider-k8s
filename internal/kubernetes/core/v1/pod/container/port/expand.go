@@ -20,6 +20,10 @@ func Expand(in []interface{}) ([]corev1.ContainerPort, error) {
 		if port, ok := value[FieldContainerPort]; ok {
 			ports[key].ContainerPort = int32(port.(int))
 		}
+
+		if port, ok := value[FieldHostPort]; ok {
+			ports[key].HostPort = int32(port.(int))
+		}
 	}
 
 	return ports, nil

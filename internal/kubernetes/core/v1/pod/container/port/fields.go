@@ -9,6 +9,8 @@ const (
 	FieldName = "name"
 	// FieldContainerPort used to identify the port which is being exposed from the container.
 	FieldContainerPort = "container"
+	// FieldHostPort used to identify the port which is being exposed from the host.
+	FieldHostPort = "host"
 )
 
 // Fields returns the fields for this package.
@@ -26,6 +28,11 @@ func Fields() *schema.Schema {
 				},
 				FieldContainerPort: {
 					Description: "Port to receive requests",
+					Type:        schema.TypeInt,
+					Optional:    true,
+				},
+				FieldHostPort: {
+					Description: "Port to receive requests from the host",
 					Type:        schema.TypeInt,
 					Optional:    true,
 				},
