@@ -4,6 +4,7 @@ import (
 	rbacv1 "k8s.io/api/rbac/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/apigroups"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/resourcenames"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/resources"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/verbs"
 )
@@ -25,6 +26,10 @@ func Expand(in []interface{}) []rbacv1.PolicyRule {
 
 		if resourcesRaw, ok := value[FieldResources]; ok {
 			rules[key].Resources = resources.Expand(resourcesRaw.([]interface{}))
+		}
+
+		if resourceNamesRaw, ok := value[FieldResourceNames]; ok {
+			rules[key].ResourceNames = resourcenames.Expand(resourceNamesRaw.([]interface{}))
 		}
 
 		if verbsRaw, ok := value[FieldVerbs]; ok {

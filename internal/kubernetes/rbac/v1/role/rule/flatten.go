@@ -17,6 +17,10 @@ func Flatten(in []rbacv1.PolicyRule) []interface{} {
 			row[FieldResources] = value.Resources
 		}
 
+		if len(value.ResourceNames) > 0 {
+			row[FieldResourceNames] = value.ResourceNames
+		}
+
 		if len(value.Verbs) > 0 {
 			row[FieldVerbs] = value.Verbs
 		}
