@@ -17,6 +17,10 @@ func Flatten(in []corev1.EnvVar) []interface{} {
 			row[FieldValue] = value.Value
 		}
 
+		if value.ValueFrom != nil && value.ValueFrom.FieldRef != nil && value.ValueFrom.FieldRef.FieldPath != "" {
+			row[FieldValue] = value.ValueFrom.FieldRef.FieldPath
+		}
+
 		flattened[key] = row
 	}
 

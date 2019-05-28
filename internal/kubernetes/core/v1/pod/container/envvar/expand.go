@@ -8,19 +8,27 @@ func Expand(in []interface{}) []corev1.EnvVar {
 		return []corev1.EnvVar{}
 	}
 
-	mounts := make([]corev1.EnvVar, len(in))
+	vars := make([]corev1.EnvVar, len(in))
 
 	for key, v := range in {
 		value := v.(map[string]interface{})
 
 		if name, ok := value[FieldName]; ok && name != "" {
-			mounts[key].Name = name.(string)
+			vars[key].Name = name.(string)
 		}
 
 		if val, ok := value[FieldValue]; ok && val != "" {
-			mounts[key].Value = val.(string)
+			vars[key].Value = val.(string)
+		}
+
+		if val, ok := value[FieldValueFieldRef]; ok && val != "" {
+			vars[key].ValueFrom = &corev1.EnvVarSource{
+				FieldRef: &corev1.ObjectFieldSelector{
+					FieldPath: val.(string),
+				},
+			}
 		}
 	}
 
-	return mounts
+	return vars
 }

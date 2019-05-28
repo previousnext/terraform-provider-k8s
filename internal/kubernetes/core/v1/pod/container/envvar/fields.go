@@ -9,6 +9,8 @@ const (
 	FieldName = "name"
 	// FieldValue is a field identifier.
 	FieldValue = "value"
+	// FieldValueFieldRef is a field identifier.
+	FieldValueFieldRef = "value_field_ref"
 )
 
 // Fields returns the fields for this package.
@@ -25,6 +27,11 @@ func Fields() *schema.Schema {
 					Description: "Name of environment variable.",
 				},
 				FieldValue: {
+					Type:        schema.TypeString,
+					Optional:    true,
+					Description: "Environment variable value.",
+				},
+				FieldValueFieldRef: {
 					Type:        schema.TypeString,
 					Optional:    true,
 					Description: "Environment variable value.",
