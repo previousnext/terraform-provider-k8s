@@ -3,6 +3,7 @@ package rule
 import (
 	rbacv1 "k8s.io/api/rbac/v1"
 
+	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/apigroups"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/resourcenames"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role/rule/resources"
@@ -22,6 +23,10 @@ func Expand(in []interface{}) []rbacv1.PolicyRule {
 
 		if apiGroupsRaw, ok := value[FieldAPIGroups]; ok {
 			rules[key].APIGroups = apigroups.Expand(apiGroupsRaw.([]interface{}))
+		}
+
+		if nonResourceURLsRaw, ok := value[FieldNonResourceURLs]; ok {
+			rules[key].NonResourceURLs = interfaceutils.ExpandSlice(nonResourceURLsRaw.([]interface{}))
 		}
 
 		if resourcesRaw, ok := value[FieldResources]; ok {

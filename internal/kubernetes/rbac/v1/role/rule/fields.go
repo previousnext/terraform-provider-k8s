@@ -18,6 +18,8 @@ const (
 	FieldResourceNames = "resource_names"
 	// FieldVerbs is used to identify the verbs field.
 	FieldVerbs = "verbs"
+	// FieldNonResourceURLs is used to declare non resource paths eg. /metrics.
+	FieldNonResourceURLs = "non_resource_urls"
 )
 
 // Fields returns the fields for this package.
@@ -28,7 +30,14 @@ func Fields() *schema.Schema {
 		Optional:    true,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{
-				FieldAPIGroups:     apigroups.Fields(),
+				FieldAPIGroups: apigroups.Fields(),
+				FieldNonResourceURLs: &schema.Schema{
+					Type:     schema.TypeList,
+					Optional: true,
+					Elem: &schema.Schema{
+						Type: schema.TypeString,
+					},
+				},
 				FieldResources:     resources.Fields(),
 				FieldResourceNames: resourcenames.Fields(),
 				FieldVerbs:         verbs.Fields(),

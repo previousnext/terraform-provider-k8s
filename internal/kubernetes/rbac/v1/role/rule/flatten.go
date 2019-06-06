@@ -13,6 +13,10 @@ func Flatten(in []rbacv1.PolicyRule) []interface{} {
 			row[FieldAPIGroups] = value.APIGroups
 		}
 
+		if len(value.NonResourceURLs) > 0 {
+			row[FieldNonResourceURLs] = value.NonResourceURLs
+		}
+
 		if len(value.Resources) > 0 {
 			row[FieldResources] = value.Resources
 		}
