@@ -33,6 +33,7 @@ func Read(d *schema.ResourceData, m interface{}) error {
 	d.Set(FieldName, service.ObjectMeta.Name)
 	d.Set(FieldNamespace, service.ObjectMeta.Namespace)
 	d.Set(FieldLabels, service.ObjectMeta.Labels)
+	d.Set(FieldAnnotations, service.ObjectMeta.Annotations)
 	d.Set(FieldType, service.Spec.Type)
 	d.Set(FieldPort, port.Flatten(service.Spec.Ports))
 	d.Set(FieldSelector, service.Spec.Selector)

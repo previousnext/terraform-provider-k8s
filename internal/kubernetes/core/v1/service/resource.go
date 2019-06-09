@@ -16,6 +16,8 @@ const (
 	FieldPort = "port"
 	// FieldLabels is a field identifier.
 	FieldLabels = "labels"
+	// FieldAnnotations is a field identifier.
+	FieldAnnotations = "annotations"
 	// FieldSelector is a field identifier.
 	FieldSelector = "selector"
 	// FieldType is a field identifier.
@@ -42,6 +44,10 @@ func Resource() *schema.Resource {
 				Optional: true,
 			},
 			FieldLabels: &schema.Schema{
+				Type:     schema.TypeMap,
+				Optional: true,
+			},
+			FieldAnnotations: &schema.Schema{
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
