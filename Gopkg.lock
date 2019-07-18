@@ -33,7 +33,7 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:0490ca3f30c22357c866c9ae23d7b1e5a96c9e13c3fed753fce74c9c42ffb53c"
+  digest = "1:9f5dfe7622fe638ed5e1e28ff6aca744cdc02c09b7eb74c2c5af5287670b4d59"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -64,15 +64,11 @@
     "private/protocol",
     "private/protocol/eventstream",
     "private/protocol/eventstream/eventstreamapi",
-    "private/protocol/json/jsonutil",
-    "private/protocol/jsonrpc",
     "private/protocol/query",
     "private/protocol/query/queryutil",
     "private/protocol/rest",
-    "private/protocol/restjson",
     "private/protocol/restxml",
     "private/protocol/xml/xmlutil",
-    "service/eks",
     "service/s3",
     "service/sts",
   ]
@@ -137,6 +133,20 @@
   revision = "4030bb1f1f0c35b30ca7009e9ebd06849dd45306"
 
 [[projects]]
+  digest = "1:bf40199583e5143d1472fc34d10d6f4b69d97572142acf343b3e43136da40823"
+  name = "github.com/google/go-cmp"
+  packages = [
+    "cmp",
+    "cmp/internal/diff",
+    "cmp/internal/flags",
+    "cmp/internal/function",
+    "cmp/internal/value",
+  ]
+  pruneopts = "UT"
+  revision = "6f77996f0c42f7b84e5a2b252227263f93432e9b"
+  version = "v0.3.0"
+
+[[projects]]
   branch = "master"
   digest = "1:3ee90c0d94da31b442dde97c99635aaafec68d0b8a3c12ee2075c6bdabeec6bb"
   name = "github.com/google/gofuzz"
@@ -193,11 +203,12 @@
   revision = "90bb99a48d86cf1d327cee9968f7428f90ba13c1"
 
 [[projects]]
-  digest = "1:fd3655921025e934da27dbb8b787b4b3c36045ee0b1782c3d0a213a6438b7cdf"
+  digest = "1:cf6b61e1b4c26b0c7526cee4a0cee6d8302b17798af4b2a56a90eedac0aef11a"
   name = "github.com/hashicorp/go-hclog"
   packages = ["."]
   pruneopts = "UT"
-  revision = "b4e5765d1e5f00a0550911084f45f8214b5b83b9"
+  revision = "5ccdce08c75b6c7b37af61159f13f6a4f5e2e928"
+  version = "v0.9.2"
 
 [[projects]]
   digest = "1:9e6e28e4a4a21fc0e3448a519ac1b1979d03c9cb15ceeee0004e5912cf37f763"
@@ -207,11 +218,15 @@
   revision = "d30f09973e19c1dfcd120b2d9c4f168e68d6b5d5"
 
 [[projects]]
-  digest = "1:50cf89975585b436f9c2d15fdb38fcb098b2962f10b7db4c88af8e8babf68808"
+  digest = "1:5d8ebc1cb15676990b1cb8b969b86de8549b21a3729bd2cf11754211e1919131"
   name = "github.com/hashicorp/go-plugin"
-  packages = ["."]
+  packages = [
+    ".",
+    "internal/plugin",
+  ]
   pruneopts = "UT"
-  revision = "e53f54cbf51efde642d4711313e829a1ff0c236d"
+  revision = "9e3e1c37db188a1acb66561ee0ed4bf4d5e77554"
+  version = "v1.0.1"
 
 [[projects]]
   digest = "1:605c47454db9040e30b20dc1b29e3e9d42d6ee742545729cdef74afb1b898ad0"
@@ -254,18 +269,22 @@
   revision = "a4b07c25de5ff55ad3b8936cea69a79a3d95a855"
 
 [[projects]]
-  digest = "1:c8b5af3be55edbe00a60cc34303ca36b5d3dab1ee50ee850ca93342d8c6197bc"
+  branch = "master"
+  digest = "1:c5635d7d7b18db32c57b2b932bbd33b31bce56083d8d4d50ebc0cb7f611086e7"
   name = "github.com/hashicorp/hcl2"
   packages = [
+    "ext/dynblock",
+    "ext/typeexpr",
     "gohcl",
     "hcl",
     "hcl/hclsyntax",
     "hcl/json",
     "hcldec",
     "hclparse",
+    "hclwrite",
   ]
   pruneopts = "UT"
-  revision = "5f8ed954abd873b2c09616ba0aa607892bbca7e9"
+  revision = "5b39d9ff3a9a746a3cdfcda7c97c3bb070a960f9"
 
 [[projects]]
   digest = "1:a0fcb763bbae723b790db78143ac713c2a96c7542a4e1a2628ba3a9aedd13ae9"
@@ -280,25 +299,40 @@
   revision = "fa9f258a92500514cc8e9c67020487709df92432"
 
 [[projects]]
-  digest = "1:5145bded18e0f1cf73b0123304fb9d528568bf530674c84b6cb0c204fdbe7691"
+  digest = "1:9dc039da9df2fb5b627b031552bcb3e01df887bf8df5059222fb38ee3fa8add3"
   name = "github.com/hashicorp/terraform"
   packages = [
+    "addrs",
     "config",
-    "config/configschema",
     "config/hcl2shim",
     "config/module",
+    "configs",
+    "configs/configschema",
     "dag",
     "flatmap",
+    "helper/didyoumean",
     "helper/hashcode",
     "helper/hilmapstructure",
+    "helper/plugin",
     "helper/schema",
     "httpclient",
+    "internal/tfplugin5",
+    "lang",
+    "lang/blocktoattr",
+    "lang/funcs",
     "moduledeps",
+    "plans",
+    "plans/objchange",
     "plugin",
+    "plugin/convert",
     "plugin/discovery",
+    "providers",
+    "provisioners",
     "registry",
     "registry/regsrc",
     "registry/response",
+    "states",
+    "states/statefile",
     "svchost",
     "svchost/auth",
     "svchost/disco",
@@ -307,8 +341,8 @@
     "version",
   ]
   pruneopts = "UT"
-  revision = "ac4fff416318bf0915a0ab80e062a99ef3724334"
-  version = "v0.11.11"
+  revision = "f17247d3d269eb930e04123e5e03252cd4ec43c6"
+  version = "v0.12.4"
 
 [[projects]]
   branch = "master"
@@ -472,6 +506,25 @@
   version = "v1.2.1"
 
 [[projects]]
+  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
+  version = "v1.2.0"
+
+[[projects]]
+  digest = "1:bb495ec276ab82d3dd08504bbc0594a65de8c3b22c6f2aaa92d05b73fbf3a82e"
+  name = "github.com/spf13/afero"
+  packages = [
+    ".",
+    "mem",
+  ]
+  pruneopts = "UT"
+  revision = "588a75ec4f32903aa5e39a2619ba6a4631e28424"
+  version = "v1.2.2"
+
+[[projects]]
   digest = "1:db345c377984d0907323c09a9b17f11d995a59649fd38f909727df358b5f9020"
   name = "github.com/ulikunitz/xz"
   packages = [
@@ -485,8 +538,19 @@
   version = "v0.5.5"
 
 [[projects]]
+  digest = "1:01d5dc3bfb14cf8fb2c924dcf026231218604b8ed15daaa028875d49e7f09071"
+  name = "github.com/vmihailenco/msgpack"
+  packages = [
+    ".",
+    "codes",
+  ]
+  pruneopts = "UT"
+  revision = "c2fc210f30a2aca9db880cc017a92c169c999253"
+  version = "v4.0.4"
+
+[[projects]]
   branch = "master"
-  digest = "1:4c972ed29eba5f27d3c3e9e84c5d49b9e03aeaae8f1976603e87c13e455ef121"
+  digest = "1:bdc499682de63db43dc2fe114105141bee794b9bdff270da8abbd60e8250c03b"
   name = "github.com/zclconf/go-cty"
   packages = [
     "cty",
@@ -495,10 +559,19 @@
     "cty/function/stdlib",
     "cty/gocty",
     "cty/json",
+    "cty/msgpack",
     "cty/set",
   ]
   pruneopts = "UT"
-  revision = "19dda139b164a5503de2051225fa6b94f5d39e05"
+  revision = "19588f92a98fd5b19bc0f475ff55fb7c4e1bd1a1"
+
+[[projects]]
+  digest = "1:7922171eda409496bd43979d690c2ba5d58912d9bc5cafdc0509e7cd5a6f8314"
+  name = "github.com/zclconf/go-cty-yaml"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "fbabe99bb1c897a56ed70103a40aa94fc50a7104"
+  version = "v0.1.0"
 
 [[projects]]
   digest = "1:b76ad73cc250c315e77a20d39b291f5d8e058302d5e90c94d105ae5e7b687cda"
@@ -520,12 +593,10 @@
 
 [[projects]]
   branch = "release-branch.go1.10"
-  digest = "1:6a7dbf2f40a07b6a16b91fa542bf760d83dbfb9e590f18e0ef07e6d9713f9b2b"
+  digest = "1:677a5d026fcc0c1e764f2d688a363316e3b157cec39b8fbaa0c1a1796aac3643"
   name = "golang.org/x/net"
   packages = [
     "context",
-    "html",
-    "html/atom",
     "http2",
     "http2/hpack",
     "idna",
@@ -586,13 +657,17 @@
   revision = "85acf8d2951cb2a3bde7632f9ff273ef0379bcbd"
 
 [[projects]]
-  digest = "1:6f3bd49ddf2e104e52062774d797714371fac1b8bddfd8e124ce78e6b2264a10"
+  digest = "1:bdfceba6be2f23ad710a04a0ed5e42ea212f091f044d1413412048745efea1a3"
   name = "google.golang.org/appengine"
   packages = [
+    ".",
+    "datastore",
     "internal",
+    "internal/app_identity",
     "internal/base",
     "internal/datastore",
     "internal/log",
+    "internal/modules",
     "internal/remote_api",
     "internal/urlfetch",
     "urlfetch",
@@ -723,7 +798,7 @@
   version = "kubernetes-1.13.3"
 
 [[projects]]
-  digest = "1:64e103a27046f47a51095997694d1a3c6d67ccb788e0529a31fa7da6fba07181"
+  digest = "1:72c2ddf01c2ee7e3a23b089992f3200952dfa89aa0287833416de64dc4b406d7"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
@@ -763,7 +838,8 @@
     "third_party/forked/golang/reflect",
   ]
   pruneopts = "UT"
-  revision = "f05b8decd79cf55449e1e5b2cc9f14496ba6b942"
+  revision = "572dfc7bdfcb4531361a17d27b92851f59acf0dc"
+  version = "kubernetes-1.13.3"
 
 [[projects]]
   digest = "1:cf5c335718854198ea786aa4e0fccd54fcda89ccad1e5929857e4cd201317c96"
@@ -846,7 +922,6 @@
     "github.com/aws/aws-sdk-go/aws",
     "github.com/aws/aws-sdk-go/aws/credentials",
     "github.com/aws/aws-sdk-go/aws/session",
-    "github.com/aws/aws-sdk-go/service/eks",
     "github.com/aws/aws-sdk-go/service/sts",
     "github.com/hashicorp/terraform/helper/schema",
     "github.com/hashicorp/terraform/plugin",
