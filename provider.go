@@ -4,6 +4,7 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apiextensions/v1beta1/crd"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apiregistration/v1beta1/apiservice"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/daemonset"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/deployment"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/apps/v1/statefulset"
@@ -53,6 +54,9 @@ const (
 
 	// ResourceCustomtResourceDefinition identifier for the Kubernetes CustomtResourceDefinition.
 	ResourceCustomtResourceDefinition = "k8s_apiextensions_v1beta1_customresourcedefinition"
+
+	// ResourceAPIService identifier for the Kubernetes APIService.
+	ResourceAPIService = "k8s_apiregistration_v1beta1_apiservice"
 )
 
 // Provider returns this providers resources.
@@ -77,6 +81,7 @@ func Provider() *schema.Provider {
 			ResourceClusterRole:               clusterrole.Resource(),
 			ResourceClusterRoleBinding:        clusterrolebinding.Resource(),
 			ResourceCustomtResourceDefinition: crd.Resource(),
+			ResourceAPIService:                apiservice.Resource(),
 		},
 		ConfigureFunc: config.Func,
 	}

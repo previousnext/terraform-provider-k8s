@@ -54,7 +54,7 @@ func Fields() *schema.Schema {
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				FieldHostPID:	{
+				FieldHostPID: {
 					Type:        schema.TypeBool,
 					Description: "Use the host’s pid namespace.",
 					Optional:    true,

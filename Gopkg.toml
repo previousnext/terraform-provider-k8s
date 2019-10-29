@@ -42,6 +42,10 @@
   version = "kubernetes-1.13.3"
 
 [[constraint]]
+  name    = "k8s.io/kube-aggregator"
+  version = "kubernetes-1.13.3"
+
+[[constraint]]
   name   = "github.com/kubernetes-sigs/aws-iam-authenticator"
   branch = "master"
 

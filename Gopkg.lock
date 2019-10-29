@@ -908,6 +908,22 @@
   revision = "8139d8cb77af419532b33dfa7dd09fbc5f1d344f"
 
 [[projects]]
+  digest = "1:0761d08cbab7345aa2b7715073879dde6235aaa5671adcab409a91da67b97b8b"
+  name = "k8s.io/kube-aggregator"
+  packages = [
+    "pkg/apis/apiregistration",
+    "pkg/apis/apiregistration/v1",
+    "pkg/apis/apiregistration/v1beta1",
+    "pkg/client/clientset_generated/clientset",
+    "pkg/client/clientset_generated/clientset/scheme",
+    "pkg/client/clientset_generated/clientset/typed/apiregistration/v1",
+    "pkg/client/clientset_generated/clientset/typed/apiregistration/v1beta1",
+  ]
+  pruneopts = "UT"
+  revision = "e37a94925e5cd59d86e8f6ea1b2b1f01d59e6928"
+  version = "kubernetes-1.13.3"
+
+[[projects]]
   digest = "1:7719608fe0b52a4ece56c2dde37bedd95b938677d1ab0f84b8a7852e4c59f849"
   name = "sigs.k8s.io/yaml"
   packages = ["."]
@@ -940,6 +956,8 @@
     "k8s.io/apimachinery/pkg/util/intstr",
     "k8s.io/client-go/kubernetes",
     "k8s.io/client-go/rest",
+    "k8s.io/kube-aggregator/pkg/apis/apiregistration/v1beta1",
+    "k8s.io/kube-aggregator/pkg/client/clientset_generated/clientset",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
