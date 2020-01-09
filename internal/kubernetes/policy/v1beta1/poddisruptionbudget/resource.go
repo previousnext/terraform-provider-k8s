@@ -14,7 +14,7 @@ const (
 	// FieldMinAvailable is a field identifier.
 	FieldMinAvailable = "min_available"
 	// FieldMatchLabels is a field identifier.
-	FieldMatchLabels = "data"
+	FieldMatchLabels = "match_labels"
 )
 
 // Resource returns this packages resource.
@@ -36,6 +36,10 @@ func Resource() *schema.Resource {
 			},
 			FieldLabels: {
 				Type:     schema.TypeMap,
+				Optional: true,
+			},
+			FieldMinAvailable: {
+				Type:     schema.TypeString,
 				Optional: true,
 			},
 			FieldMatchLabels: {
