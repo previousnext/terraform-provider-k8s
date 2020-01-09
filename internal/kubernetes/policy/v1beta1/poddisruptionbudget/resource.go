@@ -38,6 +38,10 @@ func Resource() *schema.Resource {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
+			FieldMinAvailable: {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			FieldMatchLabels: {
 				Type:     schema.TypeMap,
 				Optional: true,
