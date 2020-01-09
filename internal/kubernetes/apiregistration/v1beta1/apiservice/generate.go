@@ -18,8 +18,8 @@ func Generate(d *schema.ResourceData) (apiregistrationv1beta1.APIService, error)
 		serviceName      = d.Get(FieldServiceName).(string)
 		serviceNamespace = d.Get(FieldServiceNamespace).(string)
 		insecure         = d.Get(FieldInsecureSkipTLSVerify).(bool)
-		groupPriority    = d.Get(FieldGroupPriorityMinimum).(int32)
-		versionPriority  = d.Get(FieldVersionPriority).(int32)
+		groupPriority    = d.Get(FieldGroupPriorityMinimum).(int)
+		versionPriority  = d.Get(FieldVersionPriority).(int)
 	)
 
 	crd := apiregistrationv1beta1.APIService{
@@ -35,8 +35,8 @@ func Generate(d *schema.ResourceData) (apiregistrationv1beta1.APIService, error)
 			Group:                 group,
 			Version:               version,
 			InsecureSkipTLSVerify: insecure,
-			GroupPriorityMinimum:  groupPriority,
-			VersionPriority:       versionPriority,
+			GroupPriorityMinimum:  int32(groupPriority),
+			VersionPriority:       int32(versionPriority),
 		},
 	}
 

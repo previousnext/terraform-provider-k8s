@@ -51,7 +51,7 @@ func (c *Client) APIExtensions() *apiextensions.Clientset {
 	return c.apiextensions
 }
 
-// APIExtensions ClientSet.
+// APIRegistration ClientSet.
 func (c *Client) APIRegistration() *apiregistration.Clientset {
 	return c.apiregistration
 }
