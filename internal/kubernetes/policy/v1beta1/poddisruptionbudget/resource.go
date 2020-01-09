@@ -13,7 +13,7 @@ const (
 	FieldLabels = "labels"
 	// FieldMinAvailable is a field identifier.
 	FieldMinAvailable = "min_available"
-	// MatchLabels is a field identifier.
+	// FieldMatchLabels is a field identifier.
 	FieldMatchLabels = "data"
 )
 
