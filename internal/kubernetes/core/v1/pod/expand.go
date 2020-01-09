@@ -76,10 +76,10 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 	}
 
 	if val, ok := raw[FieldPullSecret]; ok {
-		template.Spec.ImagePullSecrets = []corev1.LocalObjectReference{
-			{
+		if val != "" {
+			template.Spec.ImagePullSecrets = append(template.Spec.ImagePullSecrets, corev1.LocalObjectReference{
 				Name: val.(string),
-			},
+			})
 		}
 	}
 

@@ -13,6 +13,7 @@ import (
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/secret"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/service"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/serviceaccount"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/policy/v1beta1/poddisruptionbudget"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/clusterrole"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/clusterrolebinding"
 	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/rbac/v1/role"
@@ -57,6 +58,9 @@ const (
 
 	// ResourceAPIService identifier for the Kubernetes APIService.
 	ResourceAPIService = "k8s_apiregistration_v1beta1_apiservice"
+
+	// ResourcePodDisruptionBudget identifier for the Kubernetes PodDisruptionBudget.
+	ResourcePodDisruptionBudget = "k8s_policy_v1beta1_poddisruptionbudget"
 )
 
 // Provider returns this providers resources.
@@ -82,6 +86,7 @@ func Provider() *schema.Provider {
 			ResourceClusterRoleBinding:        clusterrolebinding.Resource(),
 			ResourceCustomtResourceDefinition: crd.Resource(),
 			ResourceAPIService:                apiservice.Resource(),
+			ResourcePodDisruptionBudget:       poddisruptionbudget.Resource(),
 		},
 		ConfigureFunc: config.Func,
 	}
