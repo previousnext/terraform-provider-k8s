@@ -44,6 +44,10 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 		template.ObjectMeta.Annotations = interfaceutils.ExpandMap(val.(map[string]interface{}))
 	}
 
+	if val, ok := raw[FieldNodeSelector]; ok {
+		template.Spec.NodeSelector = interfaceutils.ExpandMap(val.(map[string]interface{}))
+	}
+
 	if val, ok := raw[FieldInitContainer]; ok {
 		initContainers, err := container.Expand(val.([]interface{}))
 		if err != nil {

@@ -21,6 +21,10 @@ func Flatten(template corev1.PodTemplateSpec) []interface{} {
 		row[FieldAnnotations] = template.ObjectMeta.Annotations
 	}
 
+	if len(template.Spec.NodeSelector) > 0 {
+		row[FieldNodeSelector] = template.Spec.NodeSelector
+	}
+
 	if len(template.Spec.InitContainers) > 0 {
 		row[FieldInitContainer] = container.Flatten(template.Spec.InitContainers)
 	}

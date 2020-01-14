@@ -12,6 +12,8 @@ const (
 	FieldAnnotations = "annotations"
 	// FieldLabels is a field identifier.
 	FieldLabels = "labels"
+	// FieldNodeSelector is a field identifier.
+	FieldNodeSelector = "node_selector"
 	// FieldInitContainer is a field identifier.
 	FieldInitContainer = "init_container"
 	// FieldContainer is a field identifier.
@@ -40,6 +42,10 @@ func Fields() *schema.Schema {
 					Optional: true,
 				},
 				FieldLabels: &schema.Schema{
+					Type:     schema.TypeMap,
+					Optional: true,
+				},
+				FieldNodeSelector: {
 					Type:     schema.TypeMap,
 					Optional: true,
 				},
