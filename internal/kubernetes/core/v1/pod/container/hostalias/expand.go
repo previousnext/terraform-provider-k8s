@@ -3,7 +3,7 @@ package hostalias
 import (
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/pod/container/hostalias/hostname"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/container/hostalias/hostname"
 )
 
 // Expand will return a structured object.

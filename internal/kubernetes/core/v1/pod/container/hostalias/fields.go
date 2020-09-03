@@ -3,7 +3,7 @@ package hostalias
 import (
 	"github.com/hashicorp/terraform/helper/schema"
 
-	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/pod/container/hostalias/hostname"
+	"github.com/previousnext/terraform-provider-k8s/internal/kubernetes/core/v1/pod/container/hostalias/hostname"
 )
 
 const (
