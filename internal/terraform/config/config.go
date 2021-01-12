@@ -13,11 +13,21 @@ import (
 	"github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/rest"
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 // Func which configures the Kubernetes provider.
 // https://github.com/terraform-providers/terraform-provider-kubernetes/blob/master/kubernetes/provider.go
 func Func(d *schema.ResourceData) (interface{}, error) {
+	if v, ok := d.GetOk(FieldKubeConfig); ok {
+		cfg, err := clientcmd.BuildConfigFromFlags("", v.(string))
+		if err != nil {
+			return nil, err
+		}
+
+		return NewForConfig(cfg)
+	}
+
 	cfg := &rest.Config{}
 
 	// Overriding with static configuration

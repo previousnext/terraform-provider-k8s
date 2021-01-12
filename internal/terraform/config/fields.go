@@ -3,6 +3,8 @@ package config
 import "github.com/hashicorp/terraform/helper/schema"
 
 const (
+	// FieldKubeConfig defines the path to the Kubernetes config file.
+	FieldKubeConfig = "kubeconfig"
 	// FieldHost identifier for host field.
 	FieldHost = "host"
 	// FieldInsecure identifier for insecure field.
@@ -20,6 +22,12 @@ const (
 // Fields which are used to configure the Kubernetes client.
 func Fields() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
+		FieldKubeConfig: {
+			Type:        schema.TypeString,
+			Optional:    true,
+			DefaultFunc: schema.EnvDefaultFunc("KUBECONFIG", ""),
+			Description: "The path to the Kubernetes config file.",
+		},
 		FieldHost: {
 			Type:        schema.TypeString,
 			Optional:    true,
