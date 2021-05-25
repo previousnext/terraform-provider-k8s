@@ -12,7 +12,9 @@ const (
 	// FieldLabels is a field identifier.
 	FieldLabels = "labels"
 	// FieldProvisioner is a field identifier.
-	FieldProvisioner = "storage_provisioner"
+	FieldProvisioner = "provisioner"
+	// FieldMountOptions is a field identifier.
+	FieldMountOptions = "mount_options"
 	// FieldParameters is a field identifier.
 	FieldParameters = "parameters"
 )
@@ -26,11 +28,11 @@ func Resource() *schema.Resource {
 		Delete: Delete,
 
 		Schema: map[string]*schema.Schema{
-			FieldName: &schema.Schema{
+			FieldName: {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			FieldLabels: &schema.Schema{
+			FieldLabels: {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
@@ -38,7 +40,14 @@ func Resource() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			FieldParameters: &schema.Schema{
+			FieldMountOptions: {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString,
+				},
+			},
+			FieldParameters: {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},

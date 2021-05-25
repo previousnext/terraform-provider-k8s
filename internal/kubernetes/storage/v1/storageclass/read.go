@@ -32,6 +32,7 @@ func Read(d *schema.ResourceData, m interface{}) error {
 	d.Set(FieldLabels, storageclass.ObjectMeta.Labels)
 
 	d.Set(FieldProvisioner, storageclass.Provisioner)
+	d.Set(FieldMountOptions, storageclass.MountOptions)
 	d.Set(FieldParameters, storageclass.Parameters)
 
 	return nil
