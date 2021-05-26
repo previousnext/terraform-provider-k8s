@@ -91,5 +91,9 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 		template.Spec.HostPID = val.(bool)
 	}
 
+	if val, ok := raw[FieldPriorityClassName]; ok {
+		template.Spec.PriorityClassName = val.(string)
+	}
+
 	return template, nil
 }

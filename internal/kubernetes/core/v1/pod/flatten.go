@@ -49,6 +49,10 @@ func Flatten(template corev1.PodTemplateSpec) []interface{} {
 		row[FieldHostPID] = template.Spec.HostPID
 	}
 
+	if template.Spec.PriorityClassName != "" {
+		row[FieldPriorityClassName] = template.Spec.PriorityClassName
+	}
+
 	out[0] = row
 
 	return out

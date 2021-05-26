@@ -26,6 +26,8 @@ const (
 	FieldPullSecret = "pull_secret"
 	// FieldHostPID is a field identifier.
 	FieldHostPID = "host_pid"
+	// FieldPriorityClassName is a field identifier.
+	FieldPriorityClassName = "priority_class_name"
 )
 
 // Fields which define a Pod.
@@ -37,11 +39,11 @@ func Fields() *schema.Schema {
 		MaxItems:    1,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{
-				FieldAnnotations: &schema.Schema{
+				FieldAnnotations: {
 					Type:     schema.TypeMap,
 					Optional: true,
 				},
-				FieldLabels: &schema.Schema{
+				FieldLabels: {
 					Type:     schema.TypeMap,
 					Optional: true,
 				},
@@ -63,6 +65,11 @@ func Fields() *schema.Schema {
 				FieldHostPID: {
 					Type:        schema.TypeBool,
 					Description: "Use the host’s pid namespace.",
+					Optional:    true,
+				},
+				FieldPriorityClassName: {
+					Type:        schema.TypeString,
+					Description: "Priority indicates the importance of a Pod relative to other Pods.",
 					Optional:    true,
 				},
 			},
