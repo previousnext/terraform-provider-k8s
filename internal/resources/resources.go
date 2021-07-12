@@ -62,7 +62,8 @@ const (
 	FieldPodDisruptionBudget = "k8s_policy_v1beta1_poddisruptionbudget"
 )
 
-func ResourcesMap() map[string]*schema.Resource {
+// Map returns a list of resources.
+func Map() map[string]*schema.Resource {
 	return map[string]*schema.Resource{
 		FieldNamespace:                 namespace.Resource(),
 		FieldDeployment:                deployment.Resource(),
