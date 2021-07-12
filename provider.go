@@ -12,8 +12,8 @@ import (
 func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema:         config.Fields(),
-		DataSourcesMap: datasources.DataSourcesMap(),
-		ResourcesMap:   resources.ResourcesMap(),
+		DataSourcesMap: datasources.Map(),
+		ResourcesMap:   resources.Map(),
 		ConfigureFunc:  config.Func,
 	}
 }
