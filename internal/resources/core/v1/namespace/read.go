@@ -22,6 +22,7 @@ func Read(d *schema.ResourceData, m interface{}) error {
 	}
 
 	d.Set(FieldName, namespace.ObjectMeta.Name)
+	d.Set(FieldLabels, namespace.ObjectMeta.Labels)
 
 	return nil
 }
