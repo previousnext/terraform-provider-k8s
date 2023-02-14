@@ -1,27 +1,15 @@
-# github.com/Azure/go-ntlmssp v0.0.0-20200615164410-66371956d46c
-## explicit
-# github.com/ChrisTrenkamp/goxpath v0.0.0-20190607011252-c5096ec8773d
-## explicit
-# github.com/Unknwon/com v0.0.0-20151008135407-28b053d5a292
-## explicit
 # github.com/agext/levenshtein v1.2.2
 github.com/agext/levenshtein
-# github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412
-## explicit
 # github.com/apparentlymart/go-cidr v1.1.0
 ## explicit
 github.com/apparentlymart/go-cidr/cidr
-# github.com/apparentlymart/go-textseg v1.0.0
-## explicit
 # github.com/apparentlymart/go-textseg/v12 v12.0.0
 github.com/apparentlymart/go-textseg/v12/textseg
 # github.com/apparentlymart/go-versions v1.0.0
 ## explicit
 github.com/apparentlymart/go-versions/versions
 github.com/apparentlymart/go-versions/versions/constraints
-# github.com/armon/go-radix v1.0.0
-## explicit
-# github.com/aws/aws-sdk-go v1.31.9
+# github.com/aws/aws-sdk-go v1.34.0
 ## explicit
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/arn
@@ -59,20 +47,12 @@ github.com/aws/aws-sdk-go/private/protocol/rest
 github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil
 github.com/aws/aws-sdk-go/service/sts
 github.com/aws/aws-sdk-go/service/sts/stsiface
-# github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d
-## explicit
-# github.com/bgentry/speakeasy v0.1.0
-## explicit
 # github.com/blang/semver v3.5.1+incompatible
 github.com/blang/semver
 # github.com/bmatcuk/doublestar v1.1.5
 github.com/bmatcuk/doublestar
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/dnaeon/go-vcr v0.0.0-20180920040454-5637cf3d8a31
-## explicit
-# github.com/gofrs/uuid v3.3.0+incompatible
-## explicit
 # github.com/gogo/protobuf v1.2.2-0.20190723190241-65acae22fc9d
 github.com/gogo/protobuf/proto
 github.com/gogo/protobuf/sortkeys
@@ -84,8 +64,6 @@ github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/empty
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/google/btree v1.0.0
-## explicit
 # github.com/google/go-cmp v0.3.1
 github.com/google/go-cmp/cmp
 github.com/google/go-cmp/cmp/internal/diff
@@ -101,10 +79,6 @@ github.com/google/uuid
 github.com/googleapis/gnostic/OpenAPIv2
 github.com/googleapis/gnostic/compiler
 github.com/googleapis/gnostic/extensions
-# github.com/gregjones/httpcache v0.0.0-20190212212710-3befbb6ad0cc
-## explicit
-# github.com/hashicorp/aws-sdk-go-base v0.6.0
-## explicit
 # github.com/hashicorp/errwrap v1.0.0
 github.com/hashicorp/errwrap
 # github.com/hashicorp/go-cleanhttp v0.5.1
@@ -119,8 +93,6 @@ github.com/hashicorp/go-plugin
 github.com/hashicorp/go-plugin/internal/plugin
 # github.com/hashicorp/go-retryablehttp v0.5.2
 github.com/hashicorp/go-retryablehttp
-# github.com/hashicorp/go-safetemp v1.0.0
-## explicit
 # github.com/hashicorp/go-uuid v1.0.1
 github.com/hashicorp/go-uuid
 # github.com/hashicorp/go-version v1.2.0
@@ -148,15 +120,11 @@ github.com/hashicorp/hcl/v2/hclparse
 github.com/hashicorp/hcl/v2/hclsyntax
 github.com/hashicorp/hcl/v2/hclwrite
 github.com/hashicorp/hcl/v2/json
-# github.com/hashicorp/hcl2 v0.0.0-20190702185634-5b39d9ff3a9a
-## explicit
 # github.com/hashicorp/hil v0.0.0-20190212112733-ab17b08d6590
 github.com/hashicorp/hil
 github.com/hashicorp/hil/ast
 github.com/hashicorp/hil/parser
 github.com/hashicorp/hil/scanner
-# github.com/hashicorp/logutils v1.0.0
-## explicit
 # github.com/hashicorp/terraform v0.13.0-beta1
 ## explicit
 github.com/hashicorp/terraform/addrs
@@ -209,24 +177,14 @@ github.com/json-iterator/go
 ## explicit
 github.com/kubernetes-sigs/aws-iam-authenticator/pkg/arn
 github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token
-# github.com/marstr/guid v1.1.0
-## explicit
-# github.com/masterzen/simplexml v0.0.0-20190410153822-31eea3082786
-## explicit
-# github.com/masterzen/winrm v0.0.0-20200615185753-c42b5136ff88
-## explicit
 # github.com/mitchellh/copystructure v1.0.0
 github.com/mitchellh/copystructure
 # github.com/mitchellh/go-homedir v1.1.0
 github.com/mitchellh/go-homedir
 # github.com/mitchellh/go-testing-interface v1.0.0
-## explicit
 github.com/mitchellh/go-testing-interface
 # github.com/mitchellh/go-wordwrap v1.0.0
-## explicit
 github.com/mitchellh/go-wordwrap
-# github.com/mitchellh/gox v1.0.1
-## explicit
 # github.com/mitchellh/hashstructure v1.0.0
 github.com/mitchellh/hashstructure
 # github.com/mitchellh/mapstructure v1.1.2
@@ -235,38 +193,19 @@ github.com/mitchellh/mapstructure
 ## explicit
 github.com/mitchellh/reflectwalk
 # github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
-## explicit
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
 # github.com/oklog/run v1.0.0
-## explicit
 github.com/oklog/run
-# github.com/packer-community/winrmcp v0.0.0-20180921211025-c76d91c1e7db
-## explicit
-# github.com/petar/GoLLRB v0.0.0-20130427215148-53be0d36a84c
-## explicit
-# github.com/peterbourgon/diskv v2.0.1+incompatible
-## explicit
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# github.com/posener/complete v1.2.1
-## explicit
-# github.com/satori/go.uuid v1.2.0
-## explicit
 # github.com/spf13/afero v1.2.2
-## explicit
 github.com/spf13/afero
 github.com/spf13/afero/mem
 # github.com/spf13/pflag v1.0.5
 github.com/spf13/pflag
-# github.com/terraform-providers/terraform-provider-openstack v1.15.0
-## explicit
-# github.com/tombuildsstuff/giovanni v0.12.0
-## explicit
-# github.com/ulikunitz/xz v0.5.5
-## explicit
 # github.com/vmihailenco/msgpack v4.0.4+incompatible
 ## explicit
 github.com/vmihailenco/msgpack
@@ -284,9 +223,8 @@ github.com/zclconf/go-cty/cty/set
 # github.com/zclconf/go-cty-yaml v1.0.2
 ## explicit
 github.com/zclconf/go-cty-yaml
-# golang.org/x/build v0.0.0-20190111050920-041ab4dc3f9d
-## explicit
 # golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+## explicit
 golang.org/x/crypto/bcrypt
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/cast5
@@ -562,5 +500,4 @@ k8s.io/kube-aggregator/pkg/client/clientset_generated/clientset/typed/apiregistr
 k8s.io/utils/integer
 k8s.io/utils/pointer
 # sigs.k8s.io/yaml v1.1.0
-## explicit
 sigs.k8s.io/yaml
