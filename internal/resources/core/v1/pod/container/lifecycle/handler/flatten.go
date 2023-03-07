@@ -9,7 +9,7 @@ import (
 )
 
 // Flatten structured object into unstructured.
-func Flatten(in *corev1.ProbeHandler) []interface{} {
+func Flatten(in *corev1.LifecycleHandler) []interface{} {
 	out := make([]interface{}, 1)
 
 	row := map[string]interface{}{}

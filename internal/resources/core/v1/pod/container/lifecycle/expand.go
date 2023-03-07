@@ -3,7 +3,7 @@ package lifecycle
 import (
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/previousnext/terraform-provider-k8s/internal/resources/core/v1/pod/container/handler"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/core/v1/pod/container/lifecycle/handler"
 )
 
 // Expand will return a structured object.

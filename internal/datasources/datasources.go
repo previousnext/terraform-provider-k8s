@@ -1,7 +1,7 @@
 package datasources
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	deploymentimage "github.com/previousnext/terraform-provider-k8s/internal/datasources/apps/v1/deployment/image"
 )

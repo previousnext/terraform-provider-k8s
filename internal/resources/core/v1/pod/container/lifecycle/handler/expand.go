@@ -9,12 +9,12 @@ import (
 )
 
 // Expand will return a structured object.
-func Expand(in []interface{}) *corev1.ProbeHandler {
+func Expand(in []interface{}) *corev1.LifecycleHandler {
 	if len(in) == 0 {
 		return nil
 	}
 
-	handler := &corev1.ProbeHandler{}
+	handler := &corev1.LifecycleHandler{}
 
 	raw := in[0].(map[string]interface{})
 
