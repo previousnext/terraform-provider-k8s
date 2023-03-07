@@ -17,7 +17,7 @@ func Create(d *schema.ResourceData, m interface{}) error {
 		return errors.Wrap(err, "failed to generate")
 	}
 
-	out, err := conn.APIExtensions().ApiextensionsV1beta1().CustomResourceDefinitions().Create(&crd)
+	out, err := conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Create(&crd)
 	if err != nil {
 		return errors.Wrap(err, "failed to create")
 	}

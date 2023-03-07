@@ -20,7 +20,7 @@ func Read(d *schema.ResourceData, m interface{}) error {
 		return errors.Wrap(err, "failed to get ID")
 	}
 
-	crd, err := conn.APIExtensions().ApiextensionsV1beta1().CustomResourceDefinitions().Get(name, metav1.GetOptions{})
+	crd, err := conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Get(name, metav1.GetOptions{})
 	if kerrors.IsNotFound(err) {
 		// This is how we tell Terraform that the resource does not exist.
 		d.SetId("")
@@ -34,7 +34,11 @@ func Read(d *schema.ResourceData, m interface{}) error {
 	d.Set(FieldAnnotations, crd.ObjectMeta.Annotations)
 
 	d.Set(FieldGroup, crd.Spec.Group)
-	d.Set(FieldVersion, crd.Spec.Version)
+
+	if len(crd.Spec.Versions) > 0 {
+		d.Set(FieldVersion, crd.Spec.Versions[0].Name)
+	}
+
 	d.Set(FieldScope, crd.Spec.Scope)
 	d.Set(FieldNames, names.Flatten(crd.Spec.Names))
 
