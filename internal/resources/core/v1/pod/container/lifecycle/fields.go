@@ -1,7 +1,7 @@
 package lifecycle
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/core/v1/pod/container/handler"
 )

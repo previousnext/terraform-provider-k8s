@@ -1,7 +1,7 @@
 package verbs
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 // Fields returns the fields for this package.

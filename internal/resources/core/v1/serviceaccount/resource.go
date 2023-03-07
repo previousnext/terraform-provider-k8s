@@ -1,7 +1,7 @@
 package serviceaccount
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 const (
@@ -16,10 +16,10 @@ const (
 // Resource returns this packages resource.
 func Resource() *schema.Resource {
 	return &schema.Resource{
-		Create: Create,
-		Read:   Read,
-		Update: Update,
-		Delete: Delete,
+		CreateContext: Create,
+		ReadContext:   Read,
+		UpdateContext: Update,
+		DeleteContext: Delete,
 
 		Schema: map[string]*schema.Schema{
 			FieldName: &schema.Schema{

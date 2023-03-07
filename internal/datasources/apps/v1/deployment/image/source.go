@@ -1,7 +1,7 @@
 package image
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 const (
@@ -20,7 +20,7 @@ const (
 // Source returns this packages data source.
 func Source() *schema.Resource {
 	return &schema.Resource{
-		Read: Read,
+		ReadContext: Read,
 
 		Schema: map[string]*schema.Schema{
 			FieldName: {
