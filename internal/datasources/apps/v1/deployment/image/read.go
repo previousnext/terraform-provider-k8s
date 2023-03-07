@@ -33,8 +33,11 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 
 	deployment, err := conn.Kubernetes().AppsV1().Deployments(namespace).Get(ctx, name, metav1.GetOptions{})
 	if kerrors.IsNotFound(err) {
-		d.Set(FieldResult, fallback)
-		return nil
+		if err := d.Set(FieldResult, fallback); err != nil {
+			return diag.FromErr(err)
+		}
+
+		return diags
 	} else if err != nil {
 		return diag.FromErr(err)
 	}
@@ -51,7 +54,9 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 
 	result := getImage(deployment.Spec.Template.Spec.Containers, container, fallback)
 
-	d.Set(FieldResult, result)
+	if err := d.Set(FieldResult, result); err != nil {
+		return diag.FromErr(err)
+	}
 
 	return diags
 }

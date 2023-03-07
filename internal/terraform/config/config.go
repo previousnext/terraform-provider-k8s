@@ -8,7 +8,6 @@ import (
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform/terraform"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
@@ -31,7 +30,7 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 	cfg := &rest.Config{}
 
 	// Overriding with static configuration
-	cfg.UserAgent = fmt.Sprintf("HashiCorp/1.0 Terraform/%s", terraform.VersionString())
+	cfg.UserAgent = "HashiCorp/1.0 Terraform"
 
 	if v, ok := d.GetOk(FieldHost); ok {
 		cfg.Host = v.(string)
