@@ -2,16 +2,15 @@ package config
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/sts"
+	awsconfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token"
 	"github.com/pkg/errors"
+	"github.com/previousnext/terraform-provider-k8s/internal/eks"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 )
@@ -78,23 +77,30 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 
 // Helper function to generate an EKS Kubernetes client.
 func eksToken(region, cluster, profile string) (string, error) {
-	sess, err := session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: credentials.NewSharedCredentials("", profile),
-	})
+	ctx := context.TODO()
+
+	cfg, err := awsconfig.LoadDefaultConfig(ctx,
+		awsconfig.WithRegion(region),
+		awsconfig.WithSharedConfigProfile(profile),
+	)
 	if err != nil {
-		return "", errors.Wrap(err, "failed to get session")
+		return "", fmt.Errorf("failed to get aws config: %w", err)
 	}
 
-	gen, err := token.NewGenerator(false)
+	var (
+		stsClient        = sts.NewFromConfig(cfg)
+		stsPresignClient = sts.NewPresignClient(stsClient)
+	)
+
+	gen := eks.NewSTSTokenGenerator(stsPresignClient)
 	if err != nil {
-		return "", errors.Wrap(err, "failed to create token client")
+		return "", fmt.Errorf("failed to create token generator: %w", err)
 	}
 
-	token, err := gen.GetWithSTS(cluster, sts.New(sess))
+	token, err := gen.GenerateToken(ctx, cluster)
 	if err != nil {
-		return "", errors.Wrap(err, "failed to get token")
+		return "", fmt.Errorf("failed to get sts token: %w", err)
 	}
 
-	return token.Token, nil
+	return token, nil
 }
