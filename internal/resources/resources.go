@@ -56,7 +56,7 @@ const (
 	FieldCustomtResourceDefinition = "k8s_apiextensions_v1beta1_customresourcedefinition"
 
 	// FieldAPIService identifier for the Kubernetes APIService.
-	FieldAPIService = "k8s_apiregistration_v1beta1_apiservice"
+	FieldAPIService = "k8s_apiregistration_v1_apiservice"
 
 	// FieldPodDisruptionBudget identifier for the Kubernetes PodDisruptionBudget.
 	FieldPodDisruptionBudget = "k8s_policy_v1beta1_poddisruptionbudget"
