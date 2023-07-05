@@ -1,14 +1,14 @@
 package names
 
 import (
-	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
 )
 
 // Expand will return a structured object.
-func Expand(in []interface{}) apiextensionsv1beta1.CustomResourceDefinitionNames {
-	var names apiextensionsv1beta1.CustomResourceDefinitionNames
+func Expand(in []interface{}) apiextensionsv1.CustomResourceDefinitionNames {
+	var names apiextensionsv1.CustomResourceDefinitionNames
 
 	if len(in) == 0 {
 		return names

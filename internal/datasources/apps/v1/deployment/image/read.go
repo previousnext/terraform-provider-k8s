@@ -1,8 +1,10 @@
 package image
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/pkg/errors"
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	corev1 "k8s.io/api/core/v1"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -12,7 +14,9 @@ import (
 )
 
 // Read the Deployment.
-func Read(d *schema.ResourceData, m interface{}) error {
+func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	var diags diag.Diagnostics
+
 	conn := m.(*config.Client)
 
 	var (
@@ -27,12 +31,15 @@ func Read(d *schema.ResourceData, m interface{}) error {
 		Name:      name,
 	}))
 
-	deployment, err := conn.Kubernetes().AppsV1().Deployments(namespace).Get(name, metav1.GetOptions{})
+	deployment, err := conn.Kubernetes().AppsV1().Deployments(namespace).Get(ctx, name, metav1.GetOptions{})
 	if kerrors.IsNotFound(err) {
-		d.Set(FieldResult, fallback)
-		return nil
+		if err := d.Set(FieldResult, fallback); err != nil {
+			return diag.FromErr(err)
+		}
+
+		return diags
 	} else if err != nil {
-		return errors.Wrap(err, "failed to get")
+		return diag.FromErr(err)
 	}
 
 	getImage := func(containers []corev1.Container, name, fallback string) string {
@@ -47,7 +54,9 @@ func Read(d *schema.ResourceData, m interface{}) error {
 
 	result := getImage(deployment.Spec.Template.Spec.Containers, container, fallback)
 
-	d.Set(FieldResult, result)
+	if err := d.Set(FieldResult, result); err != nil {
+		return diag.FromErr(err)
+	}
 
-	return nil
+	return diags
 }

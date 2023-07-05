@@ -1,6 +1,6 @@
 package config
 
-import "github.com/hashicorp/terraform/helper/schema"
+import "github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 const (
 	// FieldKubeConfig defines the path to the Kubernetes config file.

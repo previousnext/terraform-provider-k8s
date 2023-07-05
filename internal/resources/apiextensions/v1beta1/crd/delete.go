@@ -1,11 +1,17 @@
 package crd
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"context"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 // Delete the StorageClass.
-func Delete(d *schema.ResourceData, m interface{}) error {
+func Delete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	// Warning or errors can be collected in a slice type
+	var diags diag.Diagnostics
+
 	// We don't delete here. This generally results in very destructive outcomes.
-	return nil
+	return diags
 }

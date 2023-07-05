@@ -10,10 +10,6 @@ build:
 
 # Run all lint checking with exit codes for CI
 lint:
-	golint -set_exit_status `go list ./... | grep -v /vendor/`
+	golangci-lint run --disable=errcheck --timeout=5m
 
-# Run tests with coverage reporting
-test:
-	# @todo, Unit tests for marshalling.
-
-.PHONY: build lint test
+.PHONY: build lint

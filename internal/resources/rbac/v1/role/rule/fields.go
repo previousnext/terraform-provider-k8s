@@ -1,7 +1,7 @@
 package rule
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/rbac/v1/role/rule/apigroups"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/rbac/v1/role/rule/resourcenames"

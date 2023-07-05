@@ -1,11 +1,11 @@
 package names
 
 import (
-	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
 
 // Flatten structured object into unstructured.
-func Flatten(in apiextensionsv1beta1.CustomResourceDefinitionNames) []interface{} {
+func Flatten(in apiextensionsv1.CustomResourceDefinitionNames) []interface{} {
 	out := make([]interface{}, 1)
 
 	row := map[string]interface{}{}

@@ -2,7 +2,7 @@ package apigroups
 
 // Expand will return a structured object.
 func Expand(s []interface{}) []string {
-	result := make([]string, len(s), len(s))
+	result := make([]string, len(s))
 
 	for k, v := range s {
 		if v == nil {

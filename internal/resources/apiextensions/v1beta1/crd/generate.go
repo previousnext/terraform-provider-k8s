@@ -1,8 +1,8 @@
 package crd
 
 import (
-	"github.com/hashicorp/terraform/helper/schema"
-	apiextensionsv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
@@ -10,7 +10,7 @@ import (
 )
 
 // Generate the ServiceAccount.
-func Generate(d *schema.ResourceData) (apiextensionsv1beta1.CustomResourceDefinition, error) {
+func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition, error) {
 	var (
 		name      = d.Get(FieldName).(string)
 		rawLabels = d.Get(FieldLabels).(map[string]interface{})
@@ -20,19 +20,25 @@ func Generate(d *schema.ResourceData) (apiextensionsv1beta1.CustomResourceDefini
 		rawNames  = d.Get(FieldNames).([]interface{})
 	)
 
-	crd := apiextensionsv1beta1.CustomResourceDefinition{
+	crd := apiextensionsv1.CustomResourceDefinition{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:   name,
 			Labels: interfaceutils.ExpandMap(rawLabels),
 		},
-		Spec: apiextensionsv1beta1.CustomResourceDefinitionSpec{
-			Group:   group,
-			Version: version,
-			Scope:   apiextensionsv1beta1.ResourceScope(scope),
-			Names:   names.Expand(rawNames),
-			Subresources: &apiextensionsv1beta1.CustomResourceSubresources{
-				Status: &apiextensionsv1beta1.CustomResourceSubresourceStatus{},
+		Spec: apiextensionsv1.CustomResourceDefinitionSpec{
+			Group: group,
+			Versions: []apiextensionsv1.CustomResourceDefinitionVersion{
+				{
+					Name:    version,
+					Served:  true,
+					Storage: true,
+					Subresources: &apiextensionsv1.CustomResourceSubresources{
+						Status: &apiextensionsv1.CustomResourceSubresourceStatus{},
+					},
+				},
 			},
+			Scope: apiextensionsv1.ResourceScope(scope),
+			Names: names.Expand(rawNames),
 		},
 	}
 

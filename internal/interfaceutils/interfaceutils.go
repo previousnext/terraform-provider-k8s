@@ -2,7 +2,7 @@ package interfaceutils
 
 // ExpandSlice converts an interface slice to a string slice.
 func ExpandSlice(s []interface{}) []string {
-	result := make([]string, len(s), len(s))
+	result := make([]string, len(s))
 
 	for k, v := range s {
 		result[k] = v.(string)
