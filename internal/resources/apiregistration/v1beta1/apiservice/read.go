@@ -24,7 +24,7 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	service, err := conn.APIRegistration().ApiregistrationV1beta1().APIServices().Get(ctx, name, metav1.GetOptions{})
+	service, err := conn.APIRegistration().ApiregistrationV1().APIServices().Get(ctx, name, metav1.GetOptions{})
 	if kerrors.IsNotFound(err) {
 		// This is how we tell Terraform that the resource does not exist.
 		d.SetId("")

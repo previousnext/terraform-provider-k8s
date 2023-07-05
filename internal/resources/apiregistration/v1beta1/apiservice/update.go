@@ -22,7 +22,7 @@ func Update(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 		return diag.FromErr(err)
 	}
 
-	_, err = conn.APIRegistration().ApiregistrationV1beta1().APIServices().Update(ctx, &service, metav1.UpdateOptions{})
+	_, err = conn.APIRegistration().ApiregistrationV1().APIServices().Update(ctx, &service, metav1.UpdateOptions{})
 	if err != nil {
 		return diag.FromErr(err)
 	}

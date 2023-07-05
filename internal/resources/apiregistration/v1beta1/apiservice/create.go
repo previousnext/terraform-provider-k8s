@@ -23,7 +23,7 @@ func Create(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 		return diag.FromErr(err)
 	}
 
-	out, err := conn.APIRegistration().ApiregistrationV1beta1().APIServices().Create(ctx, &service, metav1.CreateOptions{})
+	out, err := conn.APIRegistration().ApiregistrationV1().APIServices().Create(ctx, &service, metav1.CreateOptions{})
 	if err != nil {
 		return diag.FromErr(err)
 	}

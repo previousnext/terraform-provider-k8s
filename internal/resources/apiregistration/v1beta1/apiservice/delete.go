@@ -23,7 +23,7 @@ func Delete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 		return diag.FromErr(err)
 	}
 
-	err = conn.APIRegistration().ApiregistrationV1beta1().APIServices().Delete(ctx, name, metav1.DeleteOptions{})
+	err = conn.APIRegistration().ApiregistrationV1().APIServices().Delete(ctx, name, metav1.DeleteOptions{})
 	if err != nil {
 		return diag.FromErr(err)
 	}
