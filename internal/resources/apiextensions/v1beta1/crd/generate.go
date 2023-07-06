@@ -32,6 +32,8 @@ func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition,
 					Name:    version,
 					Served:  true,
 					Storage: true,
+					// @todo, Determine better approach for schema.
+                                        Schema: &apiextensionsv1.CustomResourceValidation{},
 					Subresources: &apiextensionsv1.CustomResourceSubresources{
 						Status: &apiextensionsv1.CustomResourceSubresourceStatus{},
 					},
