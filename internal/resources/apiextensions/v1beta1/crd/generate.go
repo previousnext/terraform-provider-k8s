@@ -4,6 +4,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/utils/pointer"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
@@ -32,8 +33,34 @@ func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition,
 					Name:    version,
 					Served:  true,
 					Storage: true,
-					// @todo, Determine better approach for schema.
-                                        Schema: &apiextensionsv1.CustomResourceValidation{},
+					Schema: &apiextensionsv1.CustomResourceValidation{
+						OpenAPIV3Schema: &apiextensionsv1.JSONSchemaProps{
+							Properties: map[string]apiextensionsv1.JSONSchemaProps{
+								"apiVersion": {
+									Type: "string",
+								},
+								"kinda": {
+									Type: "string",
+								},
+								"metadata": {
+									Type: "object",
+								},
+								"spec": {
+									Type:                   "object",
+									XPreserveUnknownFields: pointer.Bool(true),
+								},
+								"status": {
+									Type:                   "object",
+									XPreserveUnknownFields: pointer.Bool(true),
+								},
+							},
+							Required: []string{
+								"metadata",
+								"spec",
+							},
+							Type: "object",
+						},
+					},
 					Subresources: &apiextensionsv1.CustomResourceSubresources{
 						Status: &apiextensionsv1.CustomResourceSubresourceStatus{},
 					},
