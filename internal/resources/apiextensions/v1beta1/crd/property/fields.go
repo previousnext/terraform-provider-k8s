@@ -17,7 +17,7 @@ const (
 func Fields() *schema.Schema {
 	return &schema.Schema{
 		Description: "Environment variables which can be set for a container",
-		Type:        schema.TypeList,
+		Type:        schema.TypeSet,
 		Optional:    true,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{

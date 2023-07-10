@@ -17,15 +17,23 @@ func Update(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 
 	conn := m.(*config.Client)
 
-	crd, err := Generate(d)
+	c, err := Generate(d)
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
-	_, err = conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Update(ctx, &crd, metav1.UpdateOptions{})
+	crd, err := conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Get(ctx, c.ObjectMeta.Name, metav1.GetOptions{})
+	if err != nil {
+		return diag.FromErr(err)
+	}
+
+	crd.Spec = c.Spec
+
+	_, err = conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Update(ctx, crd, metav1.UpdateOptions{})
 	if err != nil {
 		return diag.FromErr(err)
 	}
 
 	return diags
 }
+

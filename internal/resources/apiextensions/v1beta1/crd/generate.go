@@ -19,7 +19,7 @@ func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition,
 		version       = d.Get(FieldVersion).(string)
 		scope         = d.Get(FieldScope).(string)
 		rawNames      = d.Get(FieldNames).([]interface{})
-		rawProperties = d.Get(FieldProperty).([]interface{})
+		rawProperties = d.Get(FieldProperty).(*schema.Set).List()
 		rawRequired   = d.Get(FieldRequired).([]interface{})
 	)
 

@@ -23,8 +23,8 @@ func Expand(in []interface{}) map[string]apiextensionsv1.JSONSchemaProps {
 			prop.Type = val.(string)
 		}
 
-		if val, ok := value[FieldPreserveUnknownFields]; ok {
-			prop.XPreserveUnknownFields = pointer.Bool(val.(bool))
+		if val, ok := value[FieldPreserveUnknownFields]; ok && val == true {
+			prop.XPreserveUnknownFields = pointer.Bool(true)
 		}
 
 		if val, ok := value[FieldName]; ok && val != "" {
@@ -34,3 +34,4 @@ func Expand(in []interface{}) map[string]apiextensionsv1.JSONSchemaProps {
 
 	return vars
 }
+
