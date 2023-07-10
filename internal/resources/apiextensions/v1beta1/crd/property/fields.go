@@ -16,9 +16,8 @@ const (
 // Fields returns the fields for this package.
 func Fields() *schema.Schema {
 	return &schema.Schema{
-		Description: "Environment variables which can be set for a container",
-		Type:        schema.TypeSet,
-		Optional:    true,
+		Type:     schema.TypeSet,
+		Optional: true,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{
 				FieldName: {

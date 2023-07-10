@@ -2,12 +2,13 @@ package crd
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
 	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/required"
-	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // Generate the ServiceAccount.

@@ -2,10 +2,10 @@ package crd
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
-	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/required"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/required"
 )
 
 const (
