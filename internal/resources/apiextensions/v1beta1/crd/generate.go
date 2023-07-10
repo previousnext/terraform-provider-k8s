@@ -2,23 +2,25 @@ package crd
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/utils/pointer"
-
 	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/required"
+	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // Generate the ServiceAccount.
 func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition, error) {
 	var (
-		name      = d.Get(FieldName).(string)
-		rawLabels = d.Get(FieldLabels).(map[string]interface{})
-		group     = d.Get(FieldGroup).(string)
-		version   = d.Get(FieldVersion).(string)
-		scope     = d.Get(FieldScope).(string)
-		rawNames  = d.Get(FieldNames).([]interface{})
+		name          = d.Get(FieldName).(string)
+		rawLabels     = d.Get(FieldLabels).(map[string]interface{})
+		group         = d.Get(FieldGroup).(string)
+		version       = d.Get(FieldVersion).(string)
+		scope         = d.Get(FieldScope).(string)
+		rawNames      = d.Get(FieldNames).([]interface{})
+		rawProperties = d.Get(FieldProperty).([]interface{})
+		rawRequired   = d.Get(FieldRequired).([]interface{})
 	)
 
 	crd := apiextensionsv1.CustomResourceDefinition{
@@ -35,30 +37,9 @@ func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition,
 					Storage: true,
 					Schema: &apiextensionsv1.CustomResourceValidation{
 						OpenAPIV3Schema: &apiextensionsv1.JSONSchemaProps{
-							Properties: map[string]apiextensionsv1.JSONSchemaProps{
-								"apiVersion": {
-									Type: "string",
-								},
-								"kinda": {
-									Type: "string",
-								},
-								"metadata": {
-									Type: "object",
-								},
-								"spec": {
-									Type:                   "object",
-									XPreserveUnknownFields: pointer.Bool(true),
-								},
-								"status": {
-									Type:                   "object",
-									XPreserveUnknownFields: pointer.Bool(true),
-								},
-							},
-							Required: []string{
-								"metadata",
-								"spec",
-							},
-							Type: "object",
+							Properties: property.Expand(rawProperties),
+							Required:   required.Expand(rawRequired),
+							Type:       "object",
 						},
 					},
 					Subresources: &apiextensionsv1.CustomResourceSubresources{

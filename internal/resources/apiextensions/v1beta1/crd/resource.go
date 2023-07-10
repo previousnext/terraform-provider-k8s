@@ -2,6 +2,8 @@ package crd
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/required"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
 )
@@ -21,6 +23,10 @@ const (
 	FieldScope = "scope"
 	// FieldNames is a field identifier.
 	FieldNames = "names"
+	// FieldProperty is a field identifier.
+	FieldProperty = "property"
+	// FieldRequired is a field identifier.
+	FieldRequired = "required"
 )
 
 // Resource returns this packages Resource and Fields.
@@ -32,11 +38,11 @@ func Resource() *schema.Resource {
 		DeleteContext: Delete,
 
 		Schema: map[string]*schema.Schema{
-			FieldName: &schema.Schema{
+			FieldName: {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			FieldLabels: &schema.Schema{
+			FieldLabels: {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
@@ -52,7 +58,9 @@ func Resource() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			FieldNames: names.Fields(),
+			FieldNames:    names.Fields(),
+			FieldProperty: property.Fields(),
+			FieldRequired: required.Fields(),
 		},
 	}
 }
