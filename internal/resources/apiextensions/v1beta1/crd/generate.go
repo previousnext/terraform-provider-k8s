@@ -7,17 +7,21 @@ import (
 
 	"github.com/previousnext/terraform-provider-k8s/internal/interfaceutils"
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/required"
 )
 
 // Generate the ServiceAccount.
 func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition, error) {
 	var (
-		name      = d.Get(FieldName).(string)
-		rawLabels = d.Get(FieldLabels).(map[string]interface{})
-		group     = d.Get(FieldGroup).(string)
-		version   = d.Get(FieldVersion).(string)
-		scope     = d.Get(FieldScope).(string)
-		rawNames  = d.Get(FieldNames).([]interface{})
+		name          = d.Get(FieldName).(string)
+		rawLabels     = d.Get(FieldLabels).(map[string]interface{})
+		group         = d.Get(FieldGroup).(string)
+		version       = d.Get(FieldVersion).(string)
+		scope         = d.Get(FieldScope).(string)
+		rawNames      = d.Get(FieldNames).([]interface{})
+		rawProperties = d.Get(FieldProperty).(*schema.Set).List()
+		rawRequired   = d.Get(FieldRequired).([]interface{})
 	)
 
 	crd := apiextensionsv1.CustomResourceDefinition{
@@ -32,8 +36,13 @@ func Generate(d *schema.ResourceData) (apiextensionsv1.CustomResourceDefinition,
 					Name:    version,
 					Served:  true,
 					Storage: true,
-					// @todo, Determine better approach for schema.
-                                        Schema: &apiextensionsv1.CustomResourceValidation{},
+					Schema: &apiextensionsv1.CustomResourceValidation{
+						OpenAPIV3Schema: &apiextensionsv1.JSONSchemaProps{
+							Properties: property.Expand(rawProperties),
+							Required:   required.Expand(rawRequired),
+							Type:       "object",
+						},
+					},
 					Subresources: &apiextensionsv1.CustomResourceSubresources{
 						Status: &apiextensionsv1.CustomResourceSubresourceStatus{},
 					},
