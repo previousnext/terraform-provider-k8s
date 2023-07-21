@@ -9,6 +9,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/names"
+	"github.com/previousnext/terraform-provider-k8s/internal/resources/apiextensions/v1beta1/crd/property"
 	"github.com/previousnext/terraform-provider-k8s/internal/terraform/config"
 	"github.com/previousnext/terraform-provider-k8s/internal/terraform/id"
 )
@@ -46,6 +47,11 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 
 	d.Set(FieldScope, crd.Spec.Scope)
 	d.Set(FieldNames, names.Flatten(crd.Spec.Names))
+
+	if len(crd.Spec.Versions) > 0 {
+		d.Set(FieldProperty, property.Flatten(crd.Spec.Versions[0].Schema.OpenAPIV3Schema.Properties))
+		d.Set(FieldRequired, crd.Spec.Versions[0].Schema.OpenAPIV3Schema.Required)
+	}
 
 	return diags
 }
