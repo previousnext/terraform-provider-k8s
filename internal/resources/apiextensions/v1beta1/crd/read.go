@@ -48,8 +48,11 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 	d.Set(FieldScope, crd.Spec.Scope)
 	d.Set(FieldNames, names.Flatten(crd.Spec.Names))
 
-	if len(crd.Spec.Versions) > 0 {
-		d.Set(FieldProperty, property.Flatten(crd.Spec.Versions[0].Schema.OpenAPIV3Schema.Properties))
+	if len(crd.Spec.Versions) > 0 && crd.Spec.Versions[0].Schema != nil && crd.Spec.Versions[0].Schema.OpenAPIV3Schema != nil {
+		if crd.Spec.Versions[0].Schema.OpenAPIV3Schema.Properties != nil {
+			d.Set(FieldProperty, property.Flatten(crd.Spec.Versions[0].Schema.OpenAPIV3Schema.Properties))
+		}
+
 		d.Set(FieldRequired, crd.Spec.Versions[0].Schema.OpenAPIV3Schema.Required)
 	}
 
