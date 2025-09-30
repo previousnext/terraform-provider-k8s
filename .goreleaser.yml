@@ -1,0 +1,13 @@
+version: 2
+
+builds:
+  - id: provider
+    env: [ CGO_ENABLED=0 ]
+    goos: [ linux, darwin ]
+    goarch: [ amd64, arm64 ]
+
+release:
+  prerelease: auto
+  github:
+    owner: skpr
+    name: terraform-provider-k8s
