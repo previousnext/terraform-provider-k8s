@@ -24,9 +24,6 @@ jobs:
         with:
           go-version-file: 'go.mod'
 
-      - name: 📦 Install dependencies
-        run: go mod vendor
-
       - name: 📦 Install GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
