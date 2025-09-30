@@ -9,5 +9,5 @@ builds:
 release:
   prerelease: auto
   github:
-    owner: skpr
+    owner: previousnext
     name: terraform-provider-k8s
