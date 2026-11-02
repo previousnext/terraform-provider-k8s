@@ -1,0 +1,30 @@
+version: 2
+
+updates:
+  - package-ecosystem: gomod
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: "07:30"
+      timezone: "Australia/Sydney"
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    groups:
+      gomod-deps:
+        patterns: [ "*" ]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: wednesday
+      time: "07:30"
+      timezone: "Australia/Sydney"
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    groups:
+      github-actions-deps:
+        patterns: [ "*" ]
