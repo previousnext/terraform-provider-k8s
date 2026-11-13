@@ -27,7 +27,7 @@ func Create(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 		return diag.FromErr(err)
 	}
 
-	d.SetId(namespace.ObjectMeta.Name)
+	d.SetId(namespace.Name)
 
 	return diags
 }

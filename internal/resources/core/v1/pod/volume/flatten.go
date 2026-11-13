@@ -19,8 +19,8 @@ func Flatten(in []corev1.Volume) []interface{} {
 			row[FieldPVC] = value.PersistentVolumeClaim.ClaimName
 		}
 
-		if value.ConfigMap != nil && value.ConfigMap.LocalObjectReference.Name != "" {
-			row[FieldConfigMap] = value.ConfigMap.LocalObjectReference.Name
+		if value.ConfigMap != nil && value.ConfigMap.Name != "" {
+			row[FieldConfigMap] = value.ConfigMap.Name
 		}
 
 		if value.HostPath != nil && value.HostPath.Path != "" {

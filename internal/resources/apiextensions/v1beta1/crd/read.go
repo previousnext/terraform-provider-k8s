@@ -35,9 +35,9 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	d.Set(FieldName, crd.ObjectMeta.Name)
-	d.Set(FieldLabels, crd.ObjectMeta.Labels)
-	d.Set(FieldAnnotations, crd.ObjectMeta.Annotations)
+	d.Set(FieldName, crd.Name)
+	d.Set(FieldLabels, crd.Labels)
+	d.Set(FieldAnnotations, crd.Annotations)
 
 	d.Set(FieldGroup, crd.Spec.Group)
 

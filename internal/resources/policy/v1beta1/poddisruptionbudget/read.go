@@ -33,9 +33,9 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	d.Set(FieldName, budget.ObjectMeta.Name)
-	d.Set(FieldNamespace, budget.ObjectMeta.Namespace)
-	d.Set(FieldLabels, budget.ObjectMeta.Labels)
+	d.Set(FieldName, budget.Name)
+	d.Set(FieldNamespace, budget.Namespace)
+	d.Set(FieldLabels, budget.Labels)
 	d.Set(FieldMinAvailable, budget.Spec.MinAvailable.String())
 	d.Set(FieldMatchLabels, budget.Spec.Selector.MatchLabels)
 

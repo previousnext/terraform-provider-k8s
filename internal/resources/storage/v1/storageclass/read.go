@@ -33,8 +33,8 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	d.Set(FieldName, storageclass.ObjectMeta.Name)
-	d.Set(FieldLabels, storageclass.ObjectMeta.Labels)
+	d.Set(FieldName, storageclass.Name)
+	d.Set(FieldLabels, storageclass.Labels)
 
 	d.Set(FieldProvisioner, storageclass.Provisioner)
 	d.Set(FieldParameters, storageclass.Parameters)
