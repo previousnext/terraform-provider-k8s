@@ -17,15 +17,15 @@ jobs:
 
     steps:
       - name: ⬇️ Git clone the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 📦 Install Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v7
         with:
           go-version-file: 'go.mod'
 
       - name: 📦 Install GoReleaser
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v7
         with:
           install-only: true
 
