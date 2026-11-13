@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine3.17 as build
+FROM golang:1.25-alpine as build
 
 RUN apk add make gcc musl-dev
 
