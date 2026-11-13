@@ -7,6 +7,7 @@ import (
 
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/rest"
@@ -17,7 +18,16 @@ import (
 
 // Func which configures the Kubernetes provider.
 // https://github.com/terraform-providers/terraform-provider-kubernetes/blob/master/kubernetes/provider.go
-func Func(d *schema.ResourceData) (interface{}, error) {
+func Func(ctx context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+	client, err := configure(ctx, d)
+	if err != nil {
+		return nil, diag.FromErr(err)
+	}
+
+	return client, nil
+}
+
+func configure(ctx context.Context, d *schema.ResourceData) (interface{}, error) {
 	if v, ok := d.GetOk(FieldKubeConfig); ok {
 		cfg, err := clientcmd.BuildConfigFromFlags("", v.(string))
 		if err != nil {
@@ -59,7 +69,7 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 			region = v.(string)
 		}
 
-		token, err := eksToken(region, cluster, profile)
+		token, err := eksToken(ctx, region, cluster, profile)
 		if err != nil {
 			return nil, errors.Wrap(err, "failed to EKS bearer token")
 		}
@@ -76,9 +86,7 @@ func Func(d *schema.ResourceData) (interface{}, error) {
 }
 
 // Helper function to generate an EKS Kubernetes client.
-func eksToken(region, cluster, profile string) (string, error) {
-	ctx := context.TODO()
-
+func eksToken(ctx context.Context, region, cluster, profile string) (string, error) {
 	cfg, err := awsconfig.LoadDefaultConfig(ctx,
 		awsconfig.WithRegion(region),
 		awsconfig.WithSharedConfigProfile(profile),

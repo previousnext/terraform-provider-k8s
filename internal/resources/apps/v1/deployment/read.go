@@ -34,9 +34,9 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	d.Set(FieldName, deployment.ObjectMeta.Name)
-	d.Set(FieldNamespace, deployment.ObjectMeta.Namespace)
-	d.Set(FieldLabels, deployment.ObjectMeta.Labels)
+	d.Set(FieldName, deployment.Name)
+	d.Set(FieldNamespace, deployment.Namespace)
+	d.Set(FieldLabels, deployment.Labels)
 	d.Set(FieldMatchLabels, deployment.Spec.Selector.MatchLabels)
 	d.Set(FieldReplicas, *deployment.Spec.Replicas)
 

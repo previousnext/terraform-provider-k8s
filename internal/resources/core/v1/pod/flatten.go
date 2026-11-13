@@ -13,12 +13,12 @@ func Flatten(template corev1.PodTemplateSpec) []interface{} {
 
 	row := map[string]interface{}{}
 
-	if len(template.ObjectMeta.Labels) > 0 {
-		row[FieldLabels] = template.ObjectMeta.Labels
+	if len(template.Labels) > 0 {
+		row[FieldLabels] = template.Labels
 	}
 
-	if len(template.ObjectMeta.Annotations) > 0 {
-		row[FieldAnnotations] = template.ObjectMeta.Annotations
+	if len(template.Annotations) > 0 {
+		row[FieldAnnotations] = template.Annotations
 	}
 
 	if len(template.Spec.NodeSelector) > 0 {

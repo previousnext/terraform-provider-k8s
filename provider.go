@@ -11,9 +11,9 @@ import (
 // Provider returns this providers resources.
 func Provider() *schema.Provider {
 	return &schema.Provider{
-		Schema:         config.Fields(),
-		DataSourcesMap: datasources.Map(),
-		ResourcesMap:   resources.Map(),
-		ConfigureFunc:  config.Func,
+		Schema:               config.Fields(),
+		DataSourcesMap:       datasources.Map(),
+		ResourcesMap:         resources.Map(),
+		ConfigureContextFunc: config.Func,
 	}
 }

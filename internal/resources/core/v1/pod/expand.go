@@ -20,7 +20,7 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 	raw := in[0].(map[string]interface{})
 
 	if val, ok := raw[FieldLabels]; ok {
-		template.ObjectMeta.Labels = interfaceutils.ExpandMap(val.(map[string]interface{}))
+		template.Labels = interfaceutils.ExpandMap(val.(map[string]interface{}))
 
 		// Also apply an anti affinity rule to this pod based on the labels.
 		template.Spec.Affinity = &corev1.Affinity{
@@ -30,7 +30,7 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 						Weight: 100,
 						PodAffinityTerm: corev1.PodAffinityTerm{
 							LabelSelector: &metav1.LabelSelector{
-								MatchLabels: template.ObjectMeta.Labels,
+								MatchLabels: template.Labels,
 							},
 							TopologyKey: "kubernetes.io/hostname",
 						},
@@ -41,7 +41,7 @@ func Expand(in []interface{}) (corev1.PodTemplateSpec, error) {
 	}
 
 	if val, ok := raw[FieldAnnotations]; ok {
-		template.ObjectMeta.Annotations = interfaceutils.ExpandMap(val.(map[string]interface{}))
+		template.Annotations = interfaceutils.ExpandMap(val.(map[string]interface{}))
 	}
 
 	if val, ok := raw[FieldNodeSelector]; ok {

@@ -33,9 +33,9 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	d.Set(FieldName, serviceaccount.ObjectMeta.Name)
-	d.Set(FieldNamespace, serviceaccount.ObjectMeta.Namespace)
-	d.Set(FieldLabels, serviceaccount.ObjectMeta.Labels)
+	d.Set(FieldName, serviceaccount.Name)
+	d.Set(FieldNamespace, serviceaccount.Namespace)
+	d.Set(FieldLabels, serviceaccount.Labels)
 
 	return diags
 }

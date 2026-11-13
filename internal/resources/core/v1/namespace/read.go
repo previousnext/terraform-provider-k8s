@@ -27,8 +27,8 @@ func Read(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagn
 		return diag.FromErr(err)
 	}
 
-	d.Set(FieldName, namespace.ObjectMeta.Name)
-	d.Set(FieldLabels, namespace.ObjectMeta.Labels)
+	d.Set(FieldName, namespace.Name)
+	d.Set(FieldLabels, namespace.Labels)
 
 	return diags
 }

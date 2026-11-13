@@ -22,7 +22,7 @@ func Update(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Dia
 		return diag.FromErr(err)
 	}
 
-	crd, err := conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Get(ctx, c.ObjectMeta.Name, metav1.GetOptions{})
+	crd, err := conn.APIExtensions().ApiextensionsV1().CustomResourceDefinitions().Get(ctx, c.Name, metav1.GetOptions{})
 	if err != nil {
 		return diag.FromErr(err)
 	}
