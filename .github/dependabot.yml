@@ -16,6 +16,10 @@ updates:
     groups:
       gomod-deps:
         patterns: [ "*" ]
+        update-types: [ "minor", "patch" ]
+      gomod-major-deps:
+        patterns: [ "*" ]
+        update-types: [ "major" ]
       gomod-security-deps:
         applies-to: security-updates
         patterns: [ "*" ]
@@ -35,6 +39,10 @@ updates:
     groups:
       github-actions-deps:
         patterns: [ "*" ]
+        update-types: [ "minor", "patch" ]
+      github-actions-major-deps:
+        patterns: [ "*" ]
+        update-types: [ "major" ]
       github-actions-security-deps:
         applies-to: security-updates
         patterns: [ "*" ]
